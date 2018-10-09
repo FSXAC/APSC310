@@ -1,0 +1,168 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{breakurl}
+\usepackage[superscript]{cite}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{nth}
+% \usepackage[default,scale=1.0]{opensans}
+\usepackage{setspace}
+\usepackage{siunitx}
+\usepackage{svg}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{url}
+
+% [PREAMBLE]
+% Custom commands
+\newcommand{\ts}{\textsubscript}
+
+% Double spacing
+% \doublespacing
+
+% Use hyphans to break up urls
+\def\UrlBreaks{\do\/\do-}
+
+% Hyper ref setup
+\hypersetup{
+	colorlinks=true,
+	citecolor=black,
+	linkcolor=black,
+	filecolor=black,
+	urlcolor=blue,
+	pdftitle={APSC 310 Technical Report - Muchen He},
+	bookmarks=true
+}
+\urlstyle{same}
+
+% Page semantics
+\pagestyle{fancy}
+
+% Header
+\fancyhead[L]{\slshape\MakeUppercase{APSC 310}}
+\fancyhead[R]{\slshape Muchen He}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+
+% Page indent
+\parindent 0ex
+
+% Metadata
+\author{Muchen He}
+\title{APSC 310 Work Term Technical Report}
+
+% [DOCUMENT]
+\begin{document}
+
+% [TITLE PAGE]
+\begin{titlepage}
+	\begin{center}
+		\vspace*{3in}
+		\line(1, 0){400}\\
+		\Huge{\textbf{UI/UX Development Using Component-Entity Model}}\\[0.2cm]
+		\large{\textbf{Technical Work Term Report (Work Term 3)}}\\[1cm]
+		\Large{\textbf{APSC 310}}\\
+		\textbf{University of British Columbia}\\
+		\line(1, 0){400}\\
+		\vfill
+		\Large{Muchen He}\\
+		\large{Associate Developer, BioWare Edmonton}\\
+		Student Number: 44638154\\
+
+		\today \\
+	\end{center}
+\end{titlepage}
+
+% [TOC]
+\setcounter{secnumdepth}{3}
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+
+% [PREFACE]
+
+% Set page numbering to roman for preface
+\pagenumbering{roman}
+
+% Preface
+\section*{Preface \& Foreword}
+\addcontentsline{toc}{section}{Preface \& Foreword}
+
+% Purpose
+\subsection*{Purpose}
+\addcontentsline{toc}{subsection}{Purpose}
+
+% Background
+\subsection*{Background}
+\addcontentsline{toc}{subsection}{Background}
+
+% Scope
+\subsection*{Scope of Coverage}
+\addcontentsline{toc}{subsection}{Scope of Coverage}
+
+% (Other) Contributors
+\subsection*{Contributors}
+\addcontentsline{toc}{subsection}{Contributors}
+\newpage
+
+% [SUMMARY]
+\section*{Summary}
+\addcontentsline{toc}{section}{Summary}
+\newpage
+
+% [List of Figures/Tables]
+% \thispagestyle{empty}
+\listoffigures
+\addcontentsline{toc}{section}{List of Figures}
+\listoftables
+\addcontentsline{toc}{section}{List of Tables}
+\newpage
+
+% Reset page counter
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\setcounter{section}{-1}
+
+% [INTRODUCTION]
+\section{Introduction}
+
+% [DISCUSSION]
+\section{User Interface}
+\subsection{UI in Games}
+
+\subsection{Examples of UI Entities}
+
+\section{User Experience}
+
+\section{Technical: How UI is Drawn}
+
+\subsection{Immediate Mode}
+
+\section{Abstraction: How To Make Drawing Easier for Designers}
+
+\section{Tools: Component-Entity Model in Frostbite Editor}
+
+\section{Workflow}
+
+% [CONCLUSION]
+\section{Conclusions}
+
+
+
+% [BIBLIOGRAPHY]
+\clearpage
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
+% End of document
+\end{document}
