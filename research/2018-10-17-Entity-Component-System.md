@@ -28,7 +28,13 @@ author: Muchen He
 **System**
 
 - Each system runs continuously (one could have UI system, AI system, renderer system, etc.)
-- that handles all the entities, and performs global actions 
+- that handles all the entities, and performs global actions
+
+
+
+## Characteristics
+
+- An **entity manager** handles the life time of entities, it creates and destroys entities
 
 
 
