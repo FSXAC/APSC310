@@ -5,6 +5,7 @@
 \usepackage[english]{babel}
 \usepackage{breakurl}
 \usepackage[superscript]{cite}
+\usepackage{draftwatermark}
 \usepackage{fancyhdr}
 \usepackage{float}
 \usepackage[margin=1in]{geometry}
@@ -26,8 +27,16 @@
 % Custom commands
 \newcommand{\ts}{\textsubscript}
 
+% !!! Global variables
+% \newcommand{\titletext}{UI/UX Development Using Component-Entity Model}
+\newcommand{\titletext}{Exploration of Design Patterns in Game Development}
+
 % Double spacing
 % \doublespacing
+
+% Watermark
+\SetWatermarkText{Draft}
+\SetWatermarkScale{5}
 
 % Use hyphans to break up urls
 \def\UrlBreaks{\do\/\do-}
@@ -48,8 +57,8 @@
 \pagestyle{fancy}
 
 % Header
-\fancyhead[L]{\slshape\MakeUppercase{APSC 310}}
-\fancyhead[R]{\slshape Muchen He}
+\fancyhead[L]{\MakeUppercase{APSC 310}}
+\fancyhead[R]{Muchen He}
 \fancyfoot{}
 \fancyfoot[C]{\thepage}
 
@@ -68,7 +77,7 @@
 	\begin{center}
 		\vspace*{3in}
 		\line(1, 0){400}\\
-		\Huge{\textbf{UI/UX Development Using Component-Entity Model}}\\[0.2cm]
+		\Huge{\textbf{\titletext{}}}\\[0.2cm]
 		\large{\textbf{Technical Work Term Report (Work Term 3)}}\\[1cm]
 		\Large{\textbf{APSC 310}}\\
 		\textbf{University of British Columbia}\\
@@ -93,7 +102,7 @@
 % Set page numbering to roman for preface
 \pagenumbering{roman}
 
-% Preface
+% !!! Preface
 \section*{Preface \& Foreword}
 \addcontentsline{toc}{section}{Preface \& Foreword}
 
@@ -114,7 +123,7 @@
 \addcontentsline{toc}{subsection}{Contributors}
 \newpage
 
-% [SUMMARY]
+% !!! [SUMMARY]
 \section*{Summary}
 \addcontentsline{toc}{section}{Summary}
 \newpage
@@ -132,26 +141,59 @@
 \setcounter{page}{1}
 \setcounter{section}{-1}
 
-% [INTRODUCTION]
+% !!! [INTRODUCTION]
 \section{Introduction}
 
-% [DISCUSSION]
-\section{User Interface}
+\subsection{Design Pattern}
+
+What is design pattern?
+
+No it's not tartans or pokka dots.
+
+% ??? [DISCUSSION]
+\section{Background ? (Better section title)}
+
+\subsection{Game Development Components}
+
+There are many parts to a video game. It can be grouped into: rendering, physics / simulation, AI, UI, sound / music. online, controls (input handling), online / networking. All tied together by the game engine.\\
+
+Having all the systems working together monolithically is bad, becuase it's difficult to maintain, prone to errors and bugs, and hard to collaborate as sub-systems are too tightly coupled.\\
+
+This problem is not exclusive to video game development 
 
 
-\section{Design Patterns}
+\subsection{Gang of Four}
+
+In software development, the phrase ``Gang of Four'' refers to the four authors of the Design Patterns book. The book features the most common design patterns widely in use today.\\
 
 
-% [CONCLUSION]
+
+
+\section{Creational Design Patterns}
+
+\section{Behaviour Design Patterns}
+
+\section{Structural Design Patterns}
+
+\section{Architectural Patterns}
+
+\subsection{Entity-Component-System}
+
+\subsection{Model-View-Controller}
+
+% !!! [CONCLUSION]
 \section{Conclusions}
 
-
-
-% [BIBLIOGRAPHY]
+% !!! [BIBLIOGRAPHY]
 \clearpage
 \addcontentsline{toc}{section}{References}
-\bibliographystyle{ieeetr}
+\bibliographystyle{apalike}
 \bibliography{references}
+
+% !!! [APPENDIX]
+\clearpage
+\appendix
+\section{Sample Code}
 
 % End of document
 \end{document}
