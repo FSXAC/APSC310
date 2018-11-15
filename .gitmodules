@@ -1,0 +1,3 @@
+[submodule "research/MHE"]
+	path = research/MHE
+	url = https://github.com/FSXAC/MHE
