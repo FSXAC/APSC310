@@ -37,6 +37,7 @@
 % Watermark
 \SetWatermarkText{Draft}
 \SetWatermarkScale{5}
+\SetWatermarkColor[gray]{0.95}
 
 % Use hyphans to break up urls
 \def\UrlBreaks{\do\/\do-}
@@ -110,17 +111,30 @@
 \subsection*{Purpose}
 \addcontentsline{toc}{subsection}{Purpose}
 
+The purpose of this report is to explore and observer different kinds of theoretical methods nad patterns and how they're used ot develop components that make up a game.\\
+\\
+As well to consolidate my knowledge as a whole in the industry as design patterns are software development concepts and potentially applicable elsewhere in the tech industry.
+
 % Background
 \subsection*{Background}
 \addcontentsline{toc}{subsection}{Background}
+
+(Working at EA-Bioware)
+(Associate Developer (Programmer) for game Anthem)
+(Using modern game engine Frostbite)
 
 % Scope
 \subsection*{Scope of Coverage}
 \addcontentsline{toc}{subsection}{Scope of Coverage}
 
+(The scope of this report)(Covers many design patterns outlined in ``Gang of Four'')(Will not cover detailed breakdown, explaination, and specification of existing proprietary tech; i.e. extended code from the game or Frostbite engine)
+
 % (Other) Contributors
 \subsection*{Contributors}
 \addcontentsline{toc}{subsection}{Contributors}
+
+(Tim Gibson - senior software lead, manager: contribution by supervising the report and giving advice)
+
 \newpage
 
 % !!! [SUMMARY]
@@ -159,8 +173,6 @@ There are many parts to a video game. It can be grouped into: rendering, physics
 
 Having all the systems working together monolithically is bad, becuase it's difficult to maintain, prone to errors and bugs, and hard to collaborate as sub-systems are too tightly coupled.\\
 
-This problem is not exclusive to video game development 
-
 
 \subsection{Gang of Four}
 
@@ -180,6 +192,8 @@ In software development, the phrase ``Gang of Four'' refers to the four authors 
 \subsection{Entity-Component-System}
 
 \subsection{Model-View-Controller}
+
+Mostly used in UI development. 
 
 % !!! [CONCLUSION]
 \section{Conclusions}
