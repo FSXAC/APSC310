@@ -191,23 +191,38 @@ These schematics are in game levels, UI widgets, and prefabricated logic blocks 
 
 \subsubsection{Role of Programmers}
 
-At BioWare, most game programmers work with code (in C++ and C\#). Programmers are specialized to develop in-game entities, or tools for scripters, designers, and artists. Programmers 
+At BioWare, most game programmers work with code (in C++ and C\#). Programmers are specialized to develop in-game entities, or tools for scripters, designers, and artists. Programmers also integrate systems together, such as making mouse inputs interact with hitzones widgets, which interacts with graphical widgest or animation timelines.\footnote{Animation timelines are timeline that describe how a particular object will animate. Example: a fade in.}
 
 
 \subsection{Design Pattern}
 
-Design patterns are reusable, general, abstract solutions to common problems in software developent. Design patterns are meant to be used when there no problems actually exist -- doing so would cause excess undesired complexity.\\
+Design patterns are reusable, general, abstract solutions to common problems in software developent.\cite{sm-designpatterns} Design patterns are meant to be used when there no problems actually exist -- doing so would cause excess undesired complexity.
+
+\subsubsection{Antipatterns}
+Software written without care are difficult to maintain, prone to bugs and errors, and hard to collaborate. Software written with these ``hacks'' are known as \textit{antipatterns}, where there is more negative consequences than the benefits of its solution. Antipatterns are counter parts to correctly implemented design patterns.\cite{sm-antipatterns}\\
 \\
-Software written without care are difficult to maintain, prone to bugs and errors, and hard to collaborate. Software written with these ``hacks'' are known as \textit{antipatterns}, where there is more negative consequences than the benefits of its solution. Antipatterns are counter parts to correctly implemented design patterns.
+Avoid antipatterns as much as possible. Exploring the negative effects of antipatterns is not part of the scope of this report.
 
 \subsection{Gang of Four}
 
 In software development, the phrase ``Gang of Four'' refers to the four authors of the Design Patterns book. The book features the most common design patterns widely in use today.\\
 
 
-
-
 \section{Creational Design Patterns}
+
+Creational design patterns involves with object creation.\cite{sm-creationaldp} This is especially useful in game development, such as when we need to create many trees or bushes in a level of a game. These patterns become more useful when the objects we're trying to create have relationships, such as \textit{inheritance}, to other objects.\\
+\\
+
+\subsection{Builder}
+
+\subsection{Factories}
+
+\subsection{Object Pool}
+
+\subsection{Prototype}
+
+\subsection{Singleton}
+
 
 \section{Behaviour Design Patterns}
 
@@ -216,6 +231,8 @@ In software development, the phrase ``Gang of Four'' refers to the four authors 
 \section{Architectural Patterns}
 
 \subsection{Entity-Component-System}
+
+\subsubsection{Composition over Inheritance}
 
 \subsection{Model-View-Controller}
 
