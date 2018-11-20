@@ -15,7 +15,7 @@
 \usepackage{makeidx}
 \usepackage{multicol}
 \usepackage{nth}
-% \usepackage[default,scale=1.0]{opensans}
+% \usepackage[default,scale=1.0]{opensans} % CHANGED:
 \usepackage{setspace}
 \usepackage{siunitx}
 \usepackage{svg}
@@ -129,11 +129,13 @@ As well to consolidate my knowledge as a whole in the industry as design pattern
 
 (The scope of this report)(Covers many design patterns outlined in ``Gang of Four'')(Will not cover detailed breakdown, explaination, and specification of existing proprietary tech; i.e. extended code from the game or Frostbite engine)
 
+The technical coverage cited in this report is limited because the co-op work term position is working in UI/UX. Thus I lack understanding in other areas of the game such as character handling, world rendering, etc. Many of the workflows I describe in this report may only apply to UI/UX development within this project.
+
 % (Other) Contributors
 \subsection*{Contributors}
 \addcontentsline{toc}{subsection}{Contributors}
 
-(Tim Gibson - senior software lead, manager: contribution by supervising the report and giving advice)
+(Tim Gibson - senior software lead, manager: contribution by supervising the report and giving advice) 
 
 \newpage
 
@@ -153,26 +155,50 @@ As well to consolidate my knowledge as a whole in the industry as design pattern
 % Reset page counter
 \pagenumbering{arabic}
 \setcounter{page}{1}
-\setcounter{section}{-1}
+\setcounter{section}{0}
 
 % !!! [INTRODUCTION]
+\begin{multicols}{2}
+
+% ??? [DISCUSSION]
 \section{Introduction}
+
+This enters the discussion portion of the report. We will analyze the current processes in game development for UI/UX at BioWare. Then look at some of the more theoretical, templated solutions known as design patterns in later sections and draw comparisons. We will also look into how the design patterns would be used in a general sense in game development (not specific to BioWare or Bioware's current project, Anthem).
+
+\subsection{Game Development Overview}
+
+% There are many parts to a video game. It can be grouped into: rendering, physics / simulation, AI, UI, sound / music. online, controls (input handling), online / networking. All tied together by the game engine.\\
+
+% Having all the systems working together monolithically is bad, becuase it's difficult to maintain, prone to errors and bugs, and hard to collaborate as sub-systems are too tightly coupled.\\
+
+% Talk about the video game industry -> video game development
+% -> video game roles
+A major portion of the video game market consists of AAA (Triple-A) video games. These are titles with very high production value, large budget, and typically consists of a team of hundreds of developers. These developers consist of artists, scripters, programmers, managers, etc. Many of these roles are further grouped into sub-teams such as rendering, physics/simulation, AI, UI/UX, sound design, music production, networking, etc. Individual developers are specialized to work on one part of the game, with the exception of leads, managers, and other executives.
+
+\subsubsection{Game Engine}
+Developers will use a game engine so that many people can work on the project at once. The game engine is generally highly optimized for graphics rendering, physics simulation (such as collision detection), and object handling.\\
+
+The Frostbite engine is the game engine widely adoped at Electronic Arts (EA) studios. It was originally developed by Digital Illusions CE (DICE).\cite{frostbite}\cite{frostbite-wiki} As expected, the game engine is a piece of software, thus it is prone to software development problems that design patterns are ought to solve.
+
+\subsection{Game Building}
+
+Programmers make primitive entities such as an abstract UI widget, as well as the system that manages these entities.\\
+\\
+The scripters and artists then use these entities in \textit{schematics}, which are blocks of game content that contains logic and output, given some input.\\
+\\
+These schematics are in game levels, UI widgets, and prefabricated logic blocks (LogicPrefab). Thousands of these make up functionalities in a game, and are all handled by the game engine.
+
+
+\subsubsection{Role of Programmers}
+
+At BioWare, most game programmers work with code (in C++ and C\#). Programmers are specialized to develop in-game entities, or tools for scripters, designers, and artists. Programmers 
+
 
 \subsection{Design Pattern}
 
-What is design pattern?
-
-No it's not tartans or pokka dots.
-
-% ??? [DISCUSSION]
-\section{Background ? (Better section title)}
-
-\subsection{Game Development Components}
-
-There are many parts to a video game. It can be grouped into: rendering, physics / simulation, AI, UI, sound / music. online, controls (input handling), online / networking. All tied together by the game engine.\\
-
-Having all the systems working together monolithically is bad, becuase it's difficult to maintain, prone to errors and bugs, and hard to collaborate as sub-systems are too tightly coupled.\\
-
+Design patterns are reusable, general, abstract solutions to common problems in software developent. Design patterns are meant to be used when there no problems actually exist -- doing so would cause excess undesired complexity.\\
+\\
+Software written without care are difficult to maintain, prone to bugs and errors, and hard to collaborate. Software written with these ``hacks'' are known as \textit{antipatterns}, where there is more negative consequences than the benefits of its solution. Antipatterns are counter parts to correctly implemented design patterns.
 
 \subsection{Gang of Four}
 
@@ -198,10 +224,13 @@ Mostly used in UI development.
 % !!! [CONCLUSION]
 \section{Conclusions}
 
+\end{multicols}
+
 % !!! [BIBLIOGRAPHY]
 \clearpage
 \addcontentsline{toc}{section}{References}
-\bibliographystyle{apalike}
+% \bibliographystyle{apalike}
+\bibliographystyle{ieeetran}
 \bibliography{references}
 
 % !!! [APPENDIX]
