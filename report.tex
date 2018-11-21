@@ -28,8 +28,13 @@
 \newcommand{\ts}{\textsubscript}
 
 % !!! Global variables
-% \newcommand{\titletext}{UI/UX Development Using Component-Entity Model}
 \newcommand{\titletext}{Exploration of Design Patterns in Game Development}
+
+% New flags
+\newif\iftwocolumns
+
+% Set flags
+\twocolumnsfalse
 
 % Double spacing
 % \doublespacing
@@ -158,7 +163,9 @@ The technical coverage cited in this report is limited because the co-op work te
 \setcounter{section}{0}
 
 % !!! [INTRODUCTION]
+\iftwocolumns
 \begin{multicols}{2}
+\fi
 
 % ??? [DISCUSSION]
 \section{Introduction}
@@ -215,6 +222,19 @@ Creational design patterns involves with object creation.\cite{sm-creationaldp} 
 
 \subsection{Builder}
 
+In object oriented programming, the construction of an instance of an object takes parameters. It is possible  that we need a lot of parameters to satisfy more variants of the class. This introduces the telescoping constructor antipattern\cite{telescopingconstructor}, where there are numerous variations of constructor methods all delegate to the default constructor. The problem is having this many constructor methods with slight variations is hard to maintain and difficult to use. When creating a new instance (invoking the constructor), it's hard to tell what the actual paramters are if they have the same type.\\
+\\
+The builder pattern encapsulates the parameters into a single structure. The structure itself is then passed into the constructor method, where we can access the data inside the structure again. The members of the structure can be accessed and modified by name, thereby eliminating the ambiguity of telescoping constructor.\\
+
+This is useful in games. For example, a customizable character would have many parameters to be varied (Figure \ref{fig:playercharacter-1}).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{assets/playercharacter_class}
+	\caption{PlayerCharacter class with various desired parameters}
+	\label{fig:playercharacter-1}
+\end{figure}
+
 \subsection{Factories}
 
 \subsection{Object Pool}
@@ -222,6 +242,8 @@ Creational design patterns involves with object creation.\cite{sm-creationaldp} 
 \subsection{Prototype}
 
 \subsection{Singleton}
+
+In a way, they're just glorified global variable.
 
 
 \section{Behaviour Design Patterns}
@@ -241,13 +263,15 @@ Mostly used in UI development.
 % !!! [CONCLUSION]
 \section{Conclusions}
 
+\iftwocolumns
 \end{multicols}
+\fi
 
 % !!! [BIBLIOGRAPHY]
 \clearpage
 \addcontentsline{toc}{section}{References}
 % \bibliographystyle{apalike}
-\bibliographystyle{ieeetran}
+\bibliographystyle{ieeetr}
 \bibliography{references}
 
 % !!! [APPENDIX]
