@@ -16,7 +16,7 @@
 \usepackage{makeidx}
 \usepackage{multicol}
 \usepackage{nth}
-\usepackage[default,scale=1.0]{opensans} % CHANGED:
+% \usepackage[default,scale=1.0]{opensans} % CHANGED:
 \usepackage{setspace}
 \usepackage{siunitx}
 \usepackage{svg}
@@ -81,6 +81,7 @@
 % Listings style
 \lstdefinestyle{codestyle}{
 	basicstyle=\footnotesize,
+	frame=single,
 	tabsize=4
 }
 \lstset{style=codestyle}
@@ -91,11 +92,12 @@
 % [TITLE PAGE]
 \begin{titlepage}
 	\begin{center}
-		\vspace*{3in}
+		\vspace*{2in}
 		\line(1, 0){400}\\
 		\Huge{\textbf{\titletext{}}}\\[0.2cm]
 		\large{\textbf{Technical Work Term Report (Work Term 3)}}\\[1cm]
-		\Large{\textbf{APSC 310}}\\
+		\Large{\textbf{APSC 310}}\\[1cm]
+		\includegraphics[width=1.4cm]{assets/ubc}\\
 		\textbf{University of British Columbia}\\
 		\line(1, 0){400}\\
 		\vfill
