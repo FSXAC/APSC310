@@ -12,10 +12,11 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
 \usepackage{makeidx}
 \usepackage{multicol}
 \usepackage{nth}
-% \usepackage[default,scale=1.0]{opensans} % CHANGED:
+\usepackage[default,scale=1.0]{opensans} % CHANGED:
 \usepackage{setspace}
 \usepackage{siunitx}
 \usepackage{svg}
@@ -34,7 +35,8 @@
 \newif\iftwocolumns
 
 % Set flags
-\twocolumnsfalse
+% \twocolumnsfalse
+\twocolumnstrue
 
 % Double spacing
 % \doublespacing
@@ -53,7 +55,8 @@
 	citecolor=black,
 	linkcolor=black,
 	filecolor=black,
-	urlcolor=blue,
+	% urlcolor=blue,
+	urlcolor=black,
 	pdftitle={APSC 310 Technical Report - Muchen He},
 	bookmarks=true
 }
@@ -74,6 +77,13 @@
 % Metadata
 \author{Muchen He}
 \title{APSC 310 Work Term Technical Report}
+
+% Listings style
+\lstdefinestyle{codestyle}{
+	basicstyle=\footnotesize,
+	tabsize=4
+}
+\lstset{style=codestyle}
 
 % [DOCUMENT]
 \begin{document}
@@ -245,16 +255,114 @@ This is useful in games. For example, a customizable character would have many p
 
 In a way, they're just glorified global variable.
 
+In game development, singletons are often reserved for system managers. i.e. a single manager class that overlooks and orchestrates UI system.
+
+Singleton patterns are also used in expensive assets such as levels and personalization libraries (customizations) where we load them into memory during loading screen initially. Then their instance can be accessed via a static function call.
 
 \section{Behaviour Design Patterns}
 
+\subsection{Chain of Responsibility}
+
+(InputHandlers and InputDispatchers) in Frostbite engine. A series of input handlers are chained together. Each input handler may hold reference to other input handlers.\\
+\\
+When an input, such as mouse, keyboard, or controller action occurs. The calls traverses down the chain of input handlers until one of the input handler entities "consumes" it, which ends the chain.\\
+\\
+
+Another chain of command pattern observed in the Forstbite engine editor, is handling mouse press when there are multiple \textit{hitzones}\footnote{Hitzones are interactive areas for mouse that reports data and events such as mouse position, if mouse is hover, mouse button presses and releases} overlapped (figure \ref{fig:chainofcommand-mousezones}). Any press or hovering event will be handled by the top-most hitzone entity first. If the handler does not consume the input event, the event will naturally "flow" down to the next level.\\
+\\
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{assets/chainofcommand_mousezones}
+	\caption{Mouse interacting with overlapping mouse hitzones}
+	\label{fig:chainofcommand-mousezones}
+\end{figure}
+
+\subsection{Command}
+
+Decouples action request and action handlers. The callee who makes the request makes no assumptions about the class the receives the command. Effectively decoupling them.\\
+\\
+This opens up more flexibility in mapping a requets to a handler. An example is remappable input handling. Instead of listening for a key press, then calling a specific function that the key press corresponds to. It invokes a command object that holds a reference to the \textit{real object} so that the handler can be called.\\
+\\
+In between we could do more things. For instance, keep track of how many times the action has requested.\\
+\\
+Command pattern also opens up for redo/undo operations.
+
+\subsection{Mediator}\label{ssection:mediator}
+
+Mediator acts as a middle-man between communicating objects and decouples them\cite{sm-mediator}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{assets/mediator_before}
+	\caption{Objects communicating without using mediator pattern}
+	\label{fig:mediator-before}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{assets/mediator_after}
+	\caption{Objects communicating using mediator pattern}
+	\label{fig:mediator-after}
+\end{figure}
+
+As seen in figure \ref{fig:mediator-before}, complexity of interactions between objects become exponentially large as the software grows.\\
+\\
+Such problem occurs often in UI: An example would be when a input signal is mapped to multiple elements. In particular, say we have a button to open up the game menu. Then at the same time there are a few systems we need to talk to during this. First, we need to tell the game to lock all inputs to the character in the world, so that when we're navigating the menu, we don't move the character around. We want to enable mouse cursor (and hide it during game play). We might want to pause the game so that enemies don't attack in the background while we have the menu open. We might want to optimize performance by turning off rendering of the world when we're in the menu, since we might not able to see it anyway.\\
+\\
+Without using a mediator, the activated event from the button would need to invoke methods in all these different systems. This \textit{antipattern} breaks abstraction, tightly decouples all these systems together which makes it prone to error and crashes, and makes the code highly unmaintainable.\\
+\\
+Instead, we use pattern as depicted in figure \ref{fig:mediator-after}. The button event should communicate with a middle-man that sets a state. The various systems that would be affected does not know anything about the button, or anything that interacts with the mediator. It merely gets the state stored in the mediator, and performs corresponding action.
+\\
+
+In Frostbite, a similar mechanism is called a \textit{SharedLock}. 
+
 \section{Structural Design Patterns}
+
+\subsection{Adapter}
+
+A middle layer that transforms the interface of a desired object (usually provided by libraries) to work with client.
+
+\subsubsection{Difference Between Adapter and Mediator}
+
+Different from \textit{mediators} (section \ref{ssection:mediator}), as mediator manages the communication between two classes, essentially decouples the interaction of the two. Whereas adapter simply translates.\\
+\\
+Consider a real life analogy, where two people who speak different languages are fighting. A mediator would be a lawyer such that the two people don't talk to each other directly. An adapter would be a translator so that the two can communicate more directly.\\
+\\
+Thus, adapter is structural. And Mediator is behavioral.
+
+\subsection{Bridge}
+
+\subsection{Composite}
+Useful in architectures such as component-entity-systems model which centers around the idea of ``\textit{composition over inheritance}" (section \ref{ssection:ecs}).
+
+
+\subsection{Decorator}
+
+\subsection{Facade}
+
+\subsection{Flyweight}
+
+\subsection{Proxy}
+
+Smart pointers, etc.
 
 \section{Architectural Patterns}
 
-\subsection{Entity-Component-System}
+\subsection{Entity-Component-System}\label{ssection:ecs}
+
+Used in physic engines, and when there are a lot of things to handle.
+
+In UI Systems as there are also lots of things to handle. UI widgets do not necessary need to interact with other UI widgets. So using this architecture enables performance optimizations.
+
+Update calls can be queued for all objects at once. Update states can be cached. Cached data are much faster.
 
 \subsubsection{Composition over Inheritance}
+
+OOP principle that makes inheritance based on composition / behavior rather than inheritance from parent.\\
+\\
+Consider code in section \ref{code:coi-component}, rather than defining class by their ``likeness'', we define it by its function.\\
+\\
+Then in 
 
 \subsection{Model-View-Controller}
 
@@ -278,6 +386,14 @@ Mostly used in UI development.
 \clearpage
 \appendix
 \section{Sample Code}
+
+\subsection{Composition over Inheritance}
+
+\subsubsection{Components}
+\lstinputlisting[language=C++, lastline=26]{code/CompositionOverInheritance_1.hpp}\label{code:coi-component}
+
+\subsubsection{Usage}
+\lstinputlisting[language=C++, firstline=28]{code/CompositionOverInheritance_1.hpp}\label{code:coi-usage}
 
 % End of document
 \end{document}
