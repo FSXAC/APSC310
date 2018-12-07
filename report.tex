@@ -27,6 +27,7 @@
 % [PREAMBLE]
 % Custom commands
 \newcommand{\ts}{\textsubscript}
+\newcommand{\bs}{\bigskip}
 
 % !!! Global variables
 \newcommand{\titletext}{Exploration of Design Patterns in Game Development}
@@ -128,8 +129,8 @@
 \subsection*{Purpose}
 \addcontentsline{toc}{subsection}{Purpose}
 
-The purpose of this report is to explore and observer different kinds of theoretical methods nad patterns and how they're used ot develop components that make up a game.\\
-\\
+The purpose of this report is to explore and observer different kinds of theoretical methods nad patterns and how they're used ot develop components that make up a game.
+\bs
 As well to consolidate my knowledge as a whole in the industry as design patterns are software development concepts and potentially applicable elsewhere in the tech industry.
 
 % Background
@@ -145,14 +146,17 @@ As well to consolidate my knowledge as a whole in the industry as design pattern
 \addcontentsline{toc}{subsection}{Scope of Coverage}
 
 (The scope of this report)(Covers many design patterns outlined in ``Gang of Four'')(Will not cover detailed breakdown, explaination, and specification of existing proprietary tech; i.e. extended code from the game or Frostbite engine)
-
+\bs
 The technical coverage cited in this report is limited because the co-op work term position is working in UI/UX. Thus I lack understanding in other areas of the game such as character handling, world rendering, etc. Many of the workflows I describe in this report may only apply to UI/UX development within this project.
+\bs
+As the scope of game development or software development extends wide in breadth, this report will not throughly cover topics of object oriented programming, development methodologies, specific syntax in a programming language, specific implementations of algorithms in a programming language, and psychology of UI/UX.
 
 % (Other) Contributors
 \subsection*{Contributors}
 \addcontentsline{toc}{subsection}{Contributors}
 
 (Tim Gibson - senior software lead, manager: contribution by supervising the report and giving advice) 
+(Chris Johnson)
 
 \newpage
 
@@ -192,19 +196,19 @@ This enters the discussion portion of the report. We will analyze the current pr
 
 % Talk about the video game industry -> video game development
 % -> video game roles
-A major portion of the video game market consists of AAA (Triple-A) video games. These are titles with very high production value, large budget, and typically consists of a team of hundreds of developers. These developers consist of artists, scripters, programmers, managers, etc. Many of these roles are further grouped into sub-teams such as rendering, physics/simulation, AI, UI/UX, sound design, music production, networking, etc. Individual developers are specialized to work on one part of the game, with the exception of leads, managers, and other executives.
+A major portion of the video game market consists of AAA video games. These are titles with very high production value, large budget, and typically consists of a team of hundreds of developers. These developers consist of artists, scripters, programmers, managers, etc. Many of these roles are further grouped into sub-teams such as rendering, physics/simulation, AI, UI/UX, sound design, music production, networking, etc. Individual developers are specialized to work on one part of the game, with the exception of leads, managers, and other executives.
 
 \subsubsection{Game Engine}
-Developers will use a game engine so that many people can work on the project at once. The game engine is generally highly optimized for graphics rendering, physics simulation (such as collision detection), and object handling.\\
+Developers will use a game engine so that many people can work on the project at once. The game engine is generally highly optimized for graphics rendering, physics simulation (such as collision detection), and object handling.\bs
 
 The Frostbite engine is the game engine widely adoped at Electronic Arts (EA) studios. It was originally developed by Digital Illusions CE (DICE).\cite{frostbite}\cite{frostbite-wiki} As expected, the game engine is a piece of software, thus it is prone to software development problems that design patterns are ought to solve.
 
 \subsection{Game Building}
 
-Programmers make primitive entities such as an abstract UI widget, as well as the system that manages these entities.\\
-\\
-The scripters and artists then use these entities in \textit{schematics}, which are blocks of game content that contains logic and output, given some input.\\
-\\
+Programmers make primitive entities such as an abstract UI widget, as well as the system that manages these entities.
+\bs
+The scripters and artists then use these entities in \textit{schematics}, which are blocks of game content that contains logic and output, given some input.
+\bs
 These schematics are in game levels, UI widgets, and prefabricated logic blocks (LogicPrefab). Thousands of these make up functionalities in a game, and are all handled by the game engine.
 
 
@@ -212,32 +216,35 @@ These schematics are in game levels, UI widgets, and prefabricated logic blocks 
 
 At BioWare, most game programmers work with code (in C++ and C\#). Programmers are specialized to develop in-game entities, or tools for scripters, designers, and artists. Programmers also integrate systems together, such as making mouse inputs interact with hitzones widgets, which interacts with graphical widgest or animation timelines.\footnote{Animation timelines are timeline that describe how a particular object will animate. Example: a fade in.}
 
+\subsection{Object Oriented Programming}
+% TODO:
 
 \subsection{Design Pattern}
 
 Design patterns are reusable, general, abstract solutions to common problems in software developent.\cite{sm-designpatterns} Design patterns are meant to be used when there no problems actually exist -- doing so would cause excess undesired complexity.
 
 \subsubsection{Antipatterns}
-Software written without care are difficult to maintain, prone to bugs and errors, and hard to collaborate. Software written with these ``hacks'' are known as \textit{antipatterns}, where there is more negative consequences than the benefits of its solution. Antipatterns are counter parts to correctly implemented design patterns.\cite{sm-antipatterns}\\
-\\
+Software written without care are difficult to maintain, prone to bugs and errors, and hard to collaborate. Software written with these ``hacks'' are known as \textit{antipatterns}, where there is more negative consequences than the benefits of its solution. Antipatterns are counter parts to correctly implemented design patterns.\cite{sm-antipatterns}\bs
+
 Avoid antipatterns as much as possible. Exploring the negative effects of antipatterns is not part of the scope of this report.
 
 \subsection{Gang of Four}
 
-In software development, the phrase ``Gang of Four'' refers to the four authors of the Design Patterns book. The book features the most common design patterns widely in use today.\\
+In software development, the phrase ``Gang of Four'' refers to the four authors of the Design Patterns book, Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides\cite{gof-wiki}. The book features the most common design patterns widely in use today.\bigskip
+
+The design patterns featured in the book outlines the classical design patterns. Thus, many patterns would not be applicable as more recent revisions of programming languages (Python, c++11, etc.). This is because design patterns are inheritantly solutions / workarounds to limitations of the programming language. As there are more improvement in the usability of the language, certain design patterns (such as the \textit{template} pattern) are implemented less as it's less complex, less error prone, and easier to use the existing features built-in to a language.
 
 
 \section{Creational Design Patterns}
 
-Creational design patterns involves with object creation.\cite{sm-creationaldp} This is especially useful in game development, such as when we need to create many trees or bushes in a level of a game. These patterns become more useful when the objects we're trying to create have relationships, such as \textit{inheritance}, to other objects.\\
-\\
+Creational design patterns involves with object creation.\cite{sm-creationaldp} This is especially useful in game development, such as when we need to create many trees or bushes in a level of a game. These patterns become more useful when the objects we're trying to create have relationships, such as \textit{inheritance}, to other objects.\bs
 
 \subsection{Builder}
 
-In object oriented programming, the construction of an instance of an object takes parameters. It is possible  that we need a lot of parameters to satisfy more variants of the class. This introduces the telescoping constructor antipattern\cite{telescopingconstructor}, where there are numerous variations of constructor methods all delegate to the default constructor. The problem is having this many constructor methods with slight variations is hard to maintain and difficult to use. When creating a new instance (invoking the constructor), it's hard to tell what the actual paramters are if they have the same type.\\
-\\
-The builder pattern encapsulates the parameters into a single structure. The structure itself is then passed into the constructor method, where we can access the data inside the structure again. The members of the structure can be accessed and modified by name, thereby eliminating the ambiguity of telescoping constructor.\\
-
+In object oriented programming, the construction of an instance of an object takes parameters. It is possible  that we need a lot of parameters to satisfy more variants of the class. This introduces the telescoping constructor antipattern\cite{telescopingconstructor}, where there are numerous variations of constructor methods all delegate to the default constructor. The problem is having this many constructor methods with slight variations is hard to maintain and difficult to use. When creating a new instance (invoking the constructor), it's hard to tell what the actual paramters are if they have the same type.
+\bs
+The builder pattern encapsulates the parameters into a single structure. The structure itself is then passed into the constructor method, where we can access the data inside the structure again. The members of the structure can be accessed and modified by name, thereby eliminating the ambiguity of telescoping constructor.
+\bs
 This is useful in games. For example, a customizable character would have many parameters to be varied (Figure \ref{fig:playercharacter-1}).
 
 \begin{figure}[H]
@@ -265,13 +272,14 @@ Singleton patterns are also used in expensive assets such as levels and personal
 
 \subsection{Chain of Responsibility}
 
-(InputHandlers and InputDispatchers) in Frostbite engine. A series of input handlers are chained together. Each input handler may hold reference to other input handlers.\\
-\\
-When an input, such as mouse, keyboard, or controller action occurs. The calls traverses down the chain of input handlers until one of the input handler entities "consumes" it, which ends the chain.\\
-\\
+(InputHandlers and InputDispatchers) in Frostbite engine. A series of input handlers are chained together. Each input handler may hold reference to other input handlers.
+\bs
+When an input, such as mouse, keyboard, or controller action occurs. The calls traverses down the chain of input handlers until one of the input handler entities "consumes" it, which ends the chain.
+\bs
 
-Another chain of command pattern observed in the Forstbite engine editor, is handling mouse press when there are multiple \textit{hitzones}\footnote{Hitzones are interactive areas for mouse that reports data and events such as mouse position, if mouse is hover, mouse button presses and releases} overlapped (figure \ref{fig:chainofcommand-mousezones}). Any press or hovering event will be handled by the top-most hitzone entity first. If the handler does not consume the input event, the event will naturally "flow" down to the next level.\\
-\\
+Another chain of command pattern observed in the Forstbite engine editor, is handling mouse press when there are multiple \textit{hitzones}\footnote{Hitzones are interactive areas for mouse that reports data and events such as mouse position, if mouse is hover, mouse button presses and releases} overlapped (figure \ref{fig:chainofcommand-mousezones}). Any press or hovering event will be handled by the top-most hitzone entity first. If the handler does not consume the input event, the event will naturally "flow" down to the next level.
+\bs
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.3\textwidth]{assets/chainofcommand_mousezones}
@@ -281,12 +289,12 @@ Another chain of command pattern observed in the Forstbite engine editor, is han
 
 \subsection{Command}
 
-Decouples action request and action handlers. The callee who makes the request makes no assumptions about the class the receives the command. Effectively decoupling them.\\
-\\
-This opens up more flexibility in mapping a requets to a handler. An example is remappable input handling. Instead of listening for a key press, then calling a specific function that the key press corresponds to. It invokes a command object that holds a reference to the \textit{real object} so that the handler can be called.\\
-\\
-In between we could do more things. For instance, keep track of how many times the action has requested.\\
-\\
+Decouples action request and action handlers. The callee who makes the request makes no assumptions about the class the receives the command. Effectively decoupling them.
+\bs
+This opens up more flexibility in mapping a requets to a handler. An example is remappable input handling. Instead of listening for a key press, then calling a specific function that the key press corresponds to. It invokes a command object that holds a reference to the \textit{real object} so that the handler can be called.
+\bs
+In between we could do more things. For instance, keep track of how many times the action has requested.
+\bs
 Command pattern also opens up for redo/undo operations.
 
 \subsection{Mediator}\label{ssection:mediator}
@@ -307,16 +315,22 @@ Mediator acts as a middle-man between communicating objects and decouples them\c
 	\label{fig:mediator-after}
 \end{figure}
 
-As seen in figure \ref{fig:mediator-before}, complexity of interactions between objects become exponentially large as the software grows.\\
-\\
-Such problem occurs often in UI: An example would be when a input signal is mapped to multiple elements. In particular, say we have a button to open up the game menu. Then at the same time there are a few systems we need to talk to during this. First, we need to tell the game to lock all inputs to the character in the world, so that when we're navigating the menu, we don't move the character around. We want to enable mouse cursor (and hide it during game play). We might want to pause the game so that enemies don't attack in the background while we have the menu open. We might want to optimize performance by turning off rendering of the world when we're in the menu, since we might not able to see it anyway.\\
-\\
-Without using a mediator, the activated event from the button would need to invoke methods in all these different systems. This \textit{antipattern} breaks abstraction, tightly decouples all these systems together which makes it prone to error and crashes, and makes the code highly unmaintainable.\\
-\\
+As seen in figure \ref{fig:mediator-before}, complexity of interactions between objects become exponentially large as the software grows.
+\bs
+Such problem occurs often in UI: An example would be when a input signal is mapped to multiple elements. In particular, say we have a button to open up the game menu. Then at the same time there are a few systems we need to talk to during this. First, we need to tell the game to lock all inputs to the character in the world, so that when we're navigating the menu, we don't move the character around. We want to enable mouse cursor (and hide it during game play). We might want to pause the game so that enemies don't attack in the background while we have the menu open. We might want to optimize performance by turning off rendering of the world when we're in the menu, since we might not able to see it anyway.
+\bs
+Without using a mediator, the activated event from the button would need to invoke methods in all these different systems. This \textit{antipattern} breaks abstraction, tightly decouples all these systems together which makes it prone to error and crashes, and makes the code highly unmaintainable.
+\bs
 Instead, we use pattern as depicted in figure \ref{fig:mediator-after}. The button event should communicate with a middle-man that sets a state. The various systems that would be affected does not know anything about the button, or anything that interacts with the mediator. It merely gets the state stored in the mediator, and performs corresponding action.
-\\
+\bs
 
 In Frostbite, a similar mechanism is called a \textit{SharedLock}. 
+
+\subsection{Memento}
+
+\subsection{Observer}
+
+\subsection{Visitor}
 
 \section{Structural Design Patterns}
 
@@ -326,10 +340,10 @@ A middle layer that transforms the interface of a desired object (usually provid
 
 \subsubsection{Difference Between Adapter and Mediator}
 
-Different from \textit{mediators} (section \ref{ssection:mediator}), as mediator manages the communication between two classes, essentially decouples the interaction of the two. Whereas adapter simply translates.\\
-\\
-Consider a real life analogy, where two people who speak different languages are fighting. A mediator would be a lawyer such that the two people don't talk to each other directly. An adapter would be a translator so that the two can communicate more directly.\\
-\\
+Different from \textit{mediators} (section \ref{ssection:mediator}), as mediator manages the communication between two classes, essentially decouples the interaction of the two. Whereas adapter simply translates.
+\bs
+Consider a real life analogy, where two people who speak different languages are fighting. A mediator would be a lawyer such that the two people don't talk to each other directly. An adapter would be a translator so that the two can communicate more directly.
+\bs
 Thus, adapter is structural. And Mediator is behavioral.
 
 \subsection{Bridge}
@@ -360,10 +374,10 @@ Update calls can be queued for all objects at once. Update states can be cached.
 
 \subsubsection{Composition over Inheritance}
 
-OOP principle that makes inheritance based on composition / behavior rather than inheritance from parent.\\
-\\
-Consider code in section \ref{code:coi-component}, rather than defining class by their ``likeness'', we define it by its function.\\
-\\
+OOP principle that makes inheritance based on composition / behavior rather than inheritance from parent.
+\bs
+Consider code in section \ref{code:coi-component}, rather than defining class by their ``likeness'', we define it by its function.
+\bs
 Then in 
 
 \subsection{Model-View-Controller}
