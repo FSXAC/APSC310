@@ -17,6 +17,7 @@
 \usepackage{multicol}
 \usepackage{nth}
 % \usepackage[default,scale=1.0]{opensans} % CHANGED:
+\usepackage{pgf-umlcd}
 \usepackage{setspace}
 \usepackage{siunitx}
 \usepackage{svg}
@@ -31,6 +32,11 @@
 
 % !!! Global variables
 \newcommand{\titletext}{Exploration of Design Patterns in Game Development}
+
+% Change color of UML diagrams
+\renewcommand{\umltextcolor}{black}
+\renewcommand{\umldrawcolor}{black}
+\renewcommand{\umlfillcolor}{white}
 
 % New flags
 \newif\iftwocolumns
@@ -129,8 +135,8 @@
 \subsection*{Purpose}
 \addcontentsline{toc}{subsection}{Purpose}
 
-The purpose of this report is to explore and observer different kinds of theoretical methods nad patterns and how they're used ot develop components that make up a game.
-\bs
+The purpose of this report is to explore and observer different kinds of theoretical methods nad patterns and how they're used ot develop components that make up a game.\bs
+\\
 As well to consolidate my knowledge as a whole in the industry as design patterns are software development concepts and potentially applicable elsewhere in the tech industry.
 
 % Background
@@ -145,10 +151,10 @@ As well to consolidate my knowledge as a whole in the industry as design pattern
 \subsection*{Scope of Coverage}
 \addcontentsline{toc}{subsection}{Scope of Coverage}
 
-(The scope of this report)(Covers many design patterns outlined in ``Gang of Four'')(Will not cover detailed breakdown, explaination, and specification of existing proprietary tech; i.e. extended code from the game or Frostbite engine)
-\bs
-The technical coverage cited in this report is limited because the co-op work term position is working in UI/UX. Thus I lack understanding in other areas of the game such as character handling, world rendering, etc. Many of the workflows I describe in this report may only apply to UI/UX development within this project.
-\bs
+(The scope of this report)(Covers many design patterns outlined in ``Gang of Four'')(Will not cover detailed breakdown, explaination, and specification of existing proprietary tech; i.e. extended code from the game or Frostbite engine)\bs
+\\
+The technical coverage cited in this report is limited because the co-op work term position is working in UI/UX. Thus I lack understanding in other areas of the game such as character handling, world rendering, etc. Many of the workflows I describe in this report may only apply to UI/UX development within this project.\bs
+\\
 As the scope of game development or software development extends wide in breadth, this report will not throughly cover topics of object oriented programming, development methodologies, specific syntax in a programming language, specific implementations of algorithms in a programming language, and psychology of UI/UX.
 
 % (Other) Contributors
@@ -205,10 +211,10 @@ The Frostbite engine is the game engine widely adoped at Electronic Arts (EA) st
 
 \subsection{Game Building}
 
-Programmers make primitive entities such as an abstract UI widget, as well as the system that manages these entities.
-\bs
-The scripters and artists then use these entities in \textit{schematics}, which are blocks of game content that contains logic and output, given some input.
-\bs
+Programmers make primitive entities such as an abstract UI widget, as well as the system that manages these entities.\bs
+\\
+The scripters and artists then use these entities in \textit{schematics}, which are blocks of game content that contains logic and output, given some input.\bs
+\\
 These schematics are in game levels, UI widgets, and prefabricated logic blocks (LogicPrefab). Thousands of these make up functionalities in a game, and are all handled by the game engine.
 
 
@@ -225,34 +231,87 @@ Design patterns are reusable, general, abstract solutions to common problems in 
 
 \subsubsection{Antipatterns}
 Software written without care are difficult to maintain, prone to bugs and errors, and hard to collaborate. Software written with these ``hacks'' are known as \textit{antipatterns}, where there is more negative consequences than the benefits of its solution. Antipatterns are counter parts to correctly implemented design patterns.\cite{sm-antipatterns}\bs
-
+\\
 Avoid antipatterns as much as possible. Exploring the negative effects of antipatterns is not part of the scope of this report.
 
 \subsection{Gang of Four}
 
-In software development, the phrase ``Gang of Four'' refers to the four authors of the Design Patterns book, Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides\cite{gof-wiki}. The book features the most common design patterns widely in use today.\bigskip
-
+In software development, the phrase ``Gang of Four'' refers to the four authors of the Design Patterns book, Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides\cite{gof-wiki}. The book features the most common design patterns widely in use today.\bs
+\\
 The design patterns featured in the book outlines the classical design patterns. Thus, many patterns would not be applicable as more recent revisions of programming languages (Python, c++11, etc.). This is because design patterns are inheritantly solutions / workarounds to limitations of the programming language. As there are more improvement in the usability of the language, certain design patterns (such as the \textit{template} pattern) are implemented less as it's less complex, less error prone, and easier to use the existing features built-in to a language.
 
 
 \section{Creational Design Patterns}
 
-Creational design patterns involves with object creation.\cite{sm-creationaldp} This is especially useful in game development, such as when we need to create many trees or bushes in a level of a game. These patterns become more useful when the objects we're trying to create have relationships, such as \textit{inheritance}, to other objects.\bs
+Creational design patterns involves with object creation.\cite{sm-creationaldp} This is especially useful in game development, such as when we need to create many trees or bushes in a level of a game. These patterns become more useful when the objects we're trying to create have relationships, such as \textit{inheritance}, to other objects.
 
 \subsection{Builder}
 
-In object oriented programming, the construction of an instance of an object takes parameters. It is possible  that we need a lot of parameters to satisfy more variants of the class. This introduces the telescoping constructor antipattern\cite{telescopingconstructor}, where there are numerous variations of constructor methods all delegate to the default constructor. The problem is having this many constructor methods with slight variations is hard to maintain and difficult to use. When creating a new instance (invoking the constructor), it's hard to tell what the actual paramters are if they have the same type.
-\bs
-The builder pattern encapsulates the parameters into a single structure. The structure itself is then passed into the constructor method, where we can access the data inside the structure again. The members of the structure can be accessed and modified by name, thereby eliminating the ambiguity of telescoping constructor.
-\bs
-This is useful in games. For example, a customizable character would have many parameters to be varied (Figure \ref{fig:playercharacter-1}).
+In object oriented programming (OOP), the construction of a class instance takes parameters. It is possible that we need a lot of parameters to satisfy more variants of the class. This introduces the telescoping constructor antipattern\cite{telescopingconstructor}, where there are numerous variations of constructor methods all delegate to the default constructor. This chains the different constructors together like an upside-down cake, or a telescope shape.\bs
+\\
+The code is hard to maintain and difficult to use. When creating a new instance (invoking the constructor), it's hard to tell what the actual paramters are if they have the same type. Using default parameters is useful but makes code less usable as it changes the parameter ordering.\bs
+\\
+The \textbf{builder pattern} encapsulates the parameters into a single structure. The structure itself is then passed into the constructor method, where we can access the data inside the structure again. The members of the structure can be accessed and modified by name, thereby eliminating the ambiguity of telescoping constructor.\bs
+\\
+This is useful in games. For example, a customizable character has many attributes that can be filled in (Figure \ref{fig:playercharacter-1}). Realize that as we increase the number of attributes, we also need more parameters in the constructor to populate the attributes.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{assets/playercharacter_class}
+
+	\begin{tikzpicture}
+		\begin{class}{PlayerCharacter}{0,0}
+			\attribute{name: string}
+			\attribute{age: int}
+			\attribute{height: float}
+			\attribute{weight: float}
+			\operation{PlayerCharacter(string name, int age, float height, float weight)}
+		\end{class}
+	\end{tikzpicture}
+
 	\caption{PlayerCharacter class with various desired parameters}
 	\label{fig:playercharacter-1}
 \end{figure}
+
+Using the builder pattern, we create a encapsulated structure that would contain all the parameters in figure \ref{fig:playercharacter-builder} and then default all of the struct internal variables to some default value. We then have the flexibility to fill in whichever attribute we want to change by modifying the struct's members (\texttt{struct PlayerCharacterBuilder builder; builder.age = 25;}). Optional logic could be added to the builder as well.
+
+\begin{figure}[H]
+	\centering
+
+	\begin{tikzpicture}
+		\begin{class}{struct PlayerCharacterBuilder}{0,0}
+			\attribute{name: string = "Alex"}
+			\attribute{age: int = 20}
+			\attribute{height: float = 175.0}
+			\attribute{weight: float = 180.0}
+		\end{class}
+	\end{tikzpicture}
+
+	\caption{PlayerCharacterBuilder struct}
+	\label{fig:playercharacter-builder}
+\end{figure}
+
+Now, the PlayerCharacter class constructor only uses a single parameter of the builder type reference (figure \ref{fig:playercharacter-2}). The constructor then reads all the values in the struct, and assign them to the corresponding member variables.
+
+\begin{figure}[H]
+	\centering
+
+	\begin{tikzpicture}
+		\begin{class}{PlayerCharacter}{0,0}
+			\attribute{name: string}
+			\attribute{age: int}
+			\attribute{height: float}
+			\attribute{weight: float}
+			\operation{PlayerCharacter(struct PlayerCharacterBuilder \&builder)}
+		\end{class}
+	\end{tikzpicture}
+
+	\caption{PlayerCharacter class with various desired parameters}
+	\label{fig:playercharacter-2}
+\end{figure}
+
+Of course, this pattern is applicable widely in game development, from in game objects that have visual variations, to online player save files, and even the build pipelines used during development to build game assets.\bs
+\\
+A sample code for this pattern is available in section \ref{code:builder}.
 
 \subsection{Factories}
 
@@ -402,6 +461,9 @@ Mostly used in UI development.
 \clearpage
 \appendix
 \section{Sample Code}
+
+\subsection{Builder}
+\lstinputlisting[language=C++, firstline=5]{code/Builder.hpp}\label{code:builder}
 
 \subsection{Composition over Inheritance}
 
