@@ -213,10 +213,16 @@ The Frostbite engine is the game engine widely adoped at Electronic Arts (EA) st
 
 Programmers make primitive entities such as an abstract UI widget, as well as the system that manages these entities.\bs
 \\
-The scripters and artists then use these entities in \textit{schematics}, which are blocks of game content that contains logic and output, given some input.\bs
+The scripters and artists then use these entities in \textit{schematics} or \textit{blueprints}, which are used for visual scripting blocks of game content that contains logic and input/output together. Figure \ref{fig:unreal-blueprint} shows an example of what it looks like.\bs
 \\
 These schematics are in game levels, UI widgets, and prefabricated logic blocks (LogicPrefab). Thousands of these make up functionalities in a game, and are all handled by the game engine.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{assets/unreal-blueprint}
+	\caption{Blueprint (schematics) for development in Unreal Engine\cite{unity-vs-unreal}}
+	\label{fig:unreal-blueprint}
+\end{figure}
 
 \subsubsection{Role of Programmers}
 
@@ -314,6 +320,29 @@ Of course, this pattern is applicable widely in game development, from in game o
 A sample code for this pattern is available in section \ref{code:builder}.
 
 \subsection{Factories}
+
+Factory is a quintessential creational design pattern because it governs the creation of different types of objects at a scalable level. For programming games, memory allocation and management is tricky, therefore it is helpful to not expose that kind of control to the client code.\bs
+\\
+The three main factories patterns we will explore is \textit{Simple Factory}, \textit{Abstract Factory}, and \textit{Factory Method}. The general pattern in all these different factory patterns is that the keyword \texttt{new} in C++ is harmful. And that the factory should abstract away the specific steps to instantiation.\bs
+\\
+\textbf{Simple Factory}\\
+As the name suggests, the \textit{simple factory} is as simple as a factory could get, the simple factory generates an instance for the client but does not expose any instantiation logic.\bs
+\\
+A real life analogy would be purchasing a burger: the client requests one burger, and the restaurant makes the burger and give it to the client. Without the factory design pattern, the client would need to gather all the ingredients of the burger and make it themselves, which is repetitive and unproductive.\bs
+\\
+(Simple factory in game developement ehhhhh).\bs
+\\
+A sample code for this pattern is available in section \ref{code:simple-factory}.\bs
+\\
+
+\textbf{Abstract Factory}\\
+Abstract factories are useful in cases where we need to instantiate abstract objects, but we do not know the specific concrete object yet. This pattern is prevalent in cross-platform UI programming where the identical elements have similar characteristics, but behave slightly differently under the hood.\bs
+\\
+For instance, suppose we have a game that runs on XBox, PlayStation, and PC, and in it we have a UI widget to enter the player name. The expected behavior would be to open the first-party on screen keyboard for the two consoles, and do nothing for PC (as keyboard is physical). In this case, to make the code more maintainable, we would not program it with two or more variants just to work with different controls.\bs
+\\
+A similar example is provided in the sample code in section \ref{code:abstract-factory}.\bs
+\\
+Of course, the abstract factory could be generalized to various mechanisms within a game from game objects to player characters.
 
 \subsection{Object Pool}
 
@@ -464,6 +493,18 @@ Mostly used in UI development.
 
 \subsection{Builder}
 \lstinputlisting[language=C++, firstline=5]{code/Builder.hpp}\label{code:builder}
+
+\subsection{Simple Factory}
+\lstinputlisting[language=C++, firstline=3, lastline=59]{code/Factories.hpp}\label{code:simple-factory}
+
+\subsubsection{Not using factory}
+\lstinputlisting[language=C++, firstline=62, lastline=71]{code/Factories.hpp}
+
+\subsubsection{Using factory}
+\lstinputlisting[language=C++, firstline=73, lastline=76]{code/Factories.hpp}
+
+\subsection{Abstract Factory}
+\lstinputlisting[language=C++, firstline=79, lastline=116]{code/Factories.hpp}\label{code:abstract-factory}
 
 \subsection{Composition over Inheritance}
 
