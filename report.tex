@@ -323,10 +323,10 @@ A sample code for this pattern is available in section \ref{code:builder}.
 
 Factory is a quintessential creational design pattern because it governs the creation of different types of objects at a scalable level. For programming games, memory allocation and management is tricky, therefore it is helpful to not expose that kind of control to the client code.\bs
 \\
-The three main factories patterns we will explore is \textit{Simple Factory}, \textit{Abstract Factory}, and \textit{Factory Method}. The general pattern in all these different factory patterns is that the keyword \texttt{new} in C++ is harmful. And that the factory should abstract away the specific steps to instantiation.\bs
+The three main factories patterns we will explore is \textit{Simple Factory}, \textit{Abstract Factory}, and \textit{Factory Method}. However, because factory method pattern is very similar to abstract factory\cite{sm-factory-method} in the context we care about, we will only explore abstract factory. The general pattern in all these different factory patterns is that the keyword \texttt{new} in C++ is harmful. And that the factory should abstract away the specific steps to instantiation.\bs
 \\
 \textbf{Simple Factory}\\
-As the name suggests, the \textit{simple factory} is as simple as a factory could get, the simple factory generates an instance for the client but does not expose any instantiation logic.\bs
+As the name suggests, the \textit{simple factory} is as simple as a factory could get, the simple factory generates an instance for the client but does not expose any instantiation logic.\cite{simple-factory}\bs
 \\
 A real life analogy would be purchasing a burger: the client requests one burger, and the restaurant makes the burger and give it to the client. Without the factory design pattern, the client would need to gather all the ingredients of the burger and make it themselves, which is repetitive and unproductive.\bs
 \\
@@ -336,17 +336,36 @@ A sample code for this pattern is available in section \ref{code:simple-factory}
 \\
 
 \textbf{Abstract Factory}\\
-Abstract factories are useful in cases where we need to instantiate abstract objects, but we do not know the specific concrete object yet. This pattern is prevalent in cross-platform UI programming where the identical elements have similar characteristics, but behave slightly differently under the hood.\bs
+Abstract factories are useful in cases where we need to instantiate abstract objects, but we do not know the specific concrete object yet\cite{sm-abstract-factory}. This pattern is prevalent in cross-platform UI programming where the identical elements have similar characteristics, but behave slightly differently under the hood.\bs
 \\
-For instance, suppose we have a game that runs on XBox, PlayStation, and PC, and in it we have a UI widget to enter the player name. The expected behavior would be to open the first-party on screen keyboard for the two consoles, and do nothing for PC (as keyboard is physical). In this case, to make the code more maintainable, we would not program it with two or more variants just to work with different controls.\bs
+For instance, suppose we have a game that runs on Xbox, PlayStation, and PC, and in it we have a UI widget to enter the player name. The expected behavior would be to open the first-party on screen keyboard for the two consoles, and do nothing for PC (as keyboard is physical). In this case, to make the code more maintainable, we would not program it with two or more variants just to work with different controls.\bs
 \\
-A similar example is provided in the sample code in section \ref{code:abstract-factory}.\bs
+A similar example is provided in the sample code in section \ref{code:abstract-factory}\cite{sm-abstract-factory-example}.\bs
 \\
-Of course, the abstract factory could be generalized to various mechanisms within a game from game objects to player characters.
+Of course, the abstract factory could be generalized to various mechanisms within a game from game objects to player characters.\bs
+\\
 
 \subsection{Object Pool}
 
+An analogy in real life would be a library of books. When a client wants to access some information, instead of writing a new book to the client to use every time, which is expensive, we check if the book already exists in the library. Then we could lend the book to the client. When the client is finished, they return the book for other clients to checkout.\bs
+\\
+The object pool is a creational design pattern that caches objects for re-use. An object pool can let clients check-out objects from the pool. If a requested object do not exist, the pool can create a new object; although expensive, it only occurs once. Finally, using object pool better organizes object life time of the objects in the pool. Thus we can free memory by clean up unused objects periodically (often known as \textit{garbage collection}).\bs
+\\
+% NOTE: textures cannot be used as example as they are more like flyweights
+% An example of this used in games are cached textures: 
+
+% TODO:
+An example of the object pool design pattern would be
+
 \subsection{Prototype}
+
+The \textit{prototype} design pattern helps when we need to create an object that is similar to an existing one, but instantiating a new instance is relatively expensive.\bs
+\\
+For instance, suppose we have a procedrally generated 3D model of a rock and we want to clone this model all over the place $N$ times.\bs
+\\
+We could just generate $N$ rocks like how we generated the first one using the same random seed.\footnote{Procedurally generation relies on pseudo-random or noise, which are based off of a seed.} The problem is for every clone of the rock, there are computational overheads that hinders efficiency: such as re-computing the normal vectors from all the faces of the polygon, or recalculating teh UV coordinates for the texture.\bs
+\\
+Using the prototype design pattern, we implement a clone method to the rock object that copies all its data to a new instance, thereby avoiding the re-computation overheads.
 
 \subsection{Singleton}
 

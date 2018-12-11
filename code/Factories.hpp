@@ -72,7 +72,10 @@ void BeforeSimpleFactory()
 
 void AfterSimpleFactory()
 {
-	Shape* shapes[] = { SimpleShapeFactory::makeRect(5, 4), SimpleShapeFactory::makeTri(3, 1) };
+	Shape* shapes[] = {
+		SimpleShapeFactory::makeRect(5, 4),
+		SimpleShapeFactory::makeTri(3, 1)
+	};
 }
 
 /// Abstract factory: useful for platform specific things with different concrete implementations
