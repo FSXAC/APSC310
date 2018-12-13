@@ -428,7 +428,9 @@ The object pool is a creational design pattern that caches objects for re-use. A
 % An example of this used in games are cached textures: 
 
 % TODO:
-An example of the object pool design pattern would be (StateStream from simulation threads to rendering threads).
+% An example of the object pool design pattern would be (StateStream from simulation threads to rendering threads).
+
+(Objective markers that need to be displayed on the screen: they are persistent in the world, but not all of them needs to be displayed all the time. Only the ones inside players' camera frustrum are rendered. But that does not mean we should destroy other markers as it would be more expensive to create them again, and could cause performance issues if the player looks around too fast (spinning). So we return the instance of the marker when they're no longer being rendered to the object pool. They will be accessible and can be rendered again when players' camera puts these markers into view.)
 
 \subsection{Prototype}
 
@@ -529,7 +531,8 @@ Without using a mediator, the activated event from the button would need to invo
 Instead, we use pattern as depicted in figure \ref{fig:mediator-after}. The button event should communicate with a middle-man that sets a state. The various systems that would be affected does not know anything about the button, or anything that interacts with the mediator. It merely gets the state stored in the mediator, and performs corresponding action.
 \bs
 
-In Frostbite, a similar mechanism is called a \textit{SharedLock}. 
+% CHANGED: this may not be the case as shared lock is more of a 'critical system' solution
+% In Frostbite, a similar mechanism is called a \textit{SharedLock}. 
 
 \subsection{Memento}
 
@@ -608,7 +611,16 @@ TODO:
 
 Used in physic engines, and when there are a lot of things to handle.
 
-In UI Systems as there are also lots of things to handle. UI widgets do not necessary need to interact with other UI widgets. So using this architecture enables performance optimizations.
+% CHANGED: not used too much in UI
+% In UI Systems as there are also lots of things to handle. UI widgets do not necessary need to interact with other UI widgets. So using this architecture enables performance optimizations.
+
+Other examples include making certain objects in the physics engine adopt a characteristic: i.e. solid/has collision, soft body/hard body, and other physics-aware components.\bs
+\\
+It could be argued that a ``controllable'' component could exist to make certain object player-controllable (i.e player characters, car, etc.).\bs
+\\
+Objects could also inherit components that made them aware of inputs such as mouse. Before Frostbite uses input trees and hit-zone entities, certain UI element could attach mouse interaction components to make them respond to mouse events such as hover, enter and leaving hitzones, click, etc.\bs
+\\
+
 
 Update calls can be queued for all objects at once. Update states can be cached. Cached data are much faster.
 
