@@ -78,7 +78,8 @@ void AfterSimpleFactory()
 	};
 }
 
-/// Abstract factory: useful for platform specific things with different concrete implementations
+/// Abstract factory: useful for platform specific things with different concrete 
+/// implementations
 class Button
 {
 public:

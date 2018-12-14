@@ -154,18 +154,18 @@ As well to consolidate my knowledge as a whole in the industry as design pattern
 \subsection*{Scope of Coverage}
 \addcontentsline{toc}{subsection}{Scope of Coverage}
 
-(The scope of this report)(Covers many design patterns outlined in ``Gang of Four'')(Will not cover detailed breakdown, explaination, and specification of existing proprietary tech; i.e. extended code from the game or Frostbite engine)\bs
+(The scope of this report)(Covers many design patterns outlined in ``Gang of Four'')(Will not cover detailed breakdown, explanation, and specification of existing proprietary tech; i.e. extended code from the game or Frostbite engine)\bs
 \\
 The technical coverage cited in this report is limited because the co-op work term position is working in UI/UX. Thus I lack understanding in other areas of the game such as character handling, world rendering, etc. Many of the workflows I describe in this report may only apply to UI/UX development within this project.\bs
 \\
-As the scope of game development or software development extends wide in breadth, this report will not throughly cover topics of object oriented programming, development methodologies, specific syntax in a programming language, specific implementations of algorithms in a programming language, and psychology of UI/UX.
+As the scope of game development or software development extends wide in breadth, this report will not thoroughly cover topics of object oriented programming, development methodologies, specific syntax in a programming language, specific implementations of algorithms in a programming language, and psychology of UI/UX.
 
 % (Other) Contributors
 \subsection*{Contributors}
 \addcontentsline{toc}{subsection}{Contributors}
 
 (Gibson, Tim - senior software lead, manager: contribution by supervising the report and giving advice) 
-(Johnson, Chris - supervisor, programmer, assisted in design pattern exampls)
+(Johnson, Chris - supervisor, programmer, assisted in design pattern example)
 (Steadman, Andrew)
 
 \newpage
@@ -196,13 +196,13 @@ As the scope of game development or software development extends wide in breadth
 % ??? [DISCUSSION]
 \section{Introduction}
 
-This enters the discussion portion of the report. We will analyze the current processes in game development for UI/UX at BioWare. Then look at some of the more theoretical, templated solutions known as design patterns in later sections and draw comparisons. We will also look into how the design patterns would be used in a general sense in game development (not specific to BioWare or Bioware's current project, Anthem).
+This enters the discussion portion of the report. We will analyze the current processes in game development for UI/UX at BioWare. Then look at some of the more theoretical, template solutions known as design patterns in later sections and draw comparisons. We will also look into how the design patterns would be used in a general sense in game development (not specific to BioWare or Bioware's current project, Anthem).
 
 \subsection{Game Development Overview}
 
 % There are many parts to a video game. It can be grouped into: rendering, physics / simulation, AI, UI, sound / music. online, controls (input handling), online / networking. All tied together by the game engine.\\
 
-% Having all the systems working together monolithically is bad, becuase it's difficult to maintain, prone to errors and bugs, and hard to collaborate as sub-systems are too tightly coupled.\\
+% Having all the systems working together monolithically is bad, because it's difficult to maintain, prone to errors and bugs, and hard to collaborate as sub-systems are too tightly coupled.\\
 
 % Talk about the video game industry -> video game development
 % -> video game roles
@@ -211,7 +211,7 @@ A major portion of the video game market consists of AAA video games. These are 
 \subsubsection{Game Engine}
 Developers will use a game engine so that many people can work on the project at once. The game engine is generally highly optimized for graphics rendering, physics simulation (such as collision detection), and object handling.\bs
 
-The Frostbite engine is the game engine widely adoped at Electronic Arts (EA) studios. It was originally developed by Digital Illusions CE (DICE).\cite{frostbite}\cite{frostbite-wiki} As expected, the game engine is a piece of software, thus it is prone to software development problems that design patterns are ought to solve.
+The Frostbite engine is the game engine widely adopted at Electronic Arts (EA) studios. It was originally developed by Digital Illusions CE (DICE).\cite{frostbite}\cite{frostbite-wiki} As expected, the game engine is a piece of software, thus it is prone to software development problems that design patterns are ought to solve.
 
 \subsection{Game Building}
 
@@ -223,24 +223,25 @@ These schematics are in game levels, UI widgets, and prefabricated logic blocks 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{assets/unreal-blueprint}
+	\includegraphics[width=0.49\textwidth]{assets/unreal-blueprint}
 	\caption{Blueprint (schematics) for development in Unreal Engine\cite{unity-vs-unreal}}
 	\label{fig:unreal-blueprint}
 \end{figure}
 
 \subsubsection{Role of Programmers}
 
-At BioWare, most game programmers work with code (in C++ and C\#). Programmers are specialized to develop in-game entities, or tools for scripters, designers, and artists. Programmers also integrate systems together, such as making mouse inputs interact with hitzones widgets, which interacts with graphical widgest or animation timelines.\footnote{Animation timelines are timeline that describe how a particular object will animate. Example: a fade in.}
+At BioWare, most game programmers work with code (in C++ and C\#). Programmers are specialized to develop in-game entities, or tools for scripters, designers, and artists. Programmers also integrate systems together, such as making mouse inputs interact with hitzones widgets, which interacts with graphical widgets or animation timelines.\footnote{Animation timelines are timeline that describe how a particular object will animate. Example: a fade in.}
 
 \subsection{Object Oriented Programming}
 
 \textit{Object oriented programming} (OOP) is a programming paradigm centered around interaction of encapsulated objects. Objects have its own functions (methods), input and output (\textit(getters) and \textit(setters)), state and memory (member variables). OOP emphasizes on encapsulation which makes software structure easier to organize and debug. OOP allows programmers to define well-defined boundaries between features or objects. OOP also enables \textit{polymorphism} and \textit{inheritance} which are important in abstraction and organization of code.\cite{oop}\bs
 \\
-Although we will not go into depth into the subject of object oriented programming, it is vital to undertand that OOP is basis of most modern game development due to its benefits of resuability, refactoring, extensibility/scalability, maintenance, and efficiency\cite{oop}. Nearly all of the design patterns explored here are utilizing OOP concepts in some way. 
+Although we will not go into depth into the subject of object oriented programming, it is vital to understand that OOP is basis of most modern game development due to its benefits of reusability, refactoring, extensibility/scalability, maintenance, and efficiency\cite{oop}. Nearly all of the design patterns explored here are utilizing OOP concepts in some way. 
 
 \subsection{Design Pattern}
 
-Design patterns are reusable, general, abstract solutions to common problems in software developent.\cite{sm-designpatterns} Design patterns are meant to be used when there no problems actually exist -- doing so would cause excess undesired complexity.\bs
+TODO:
+Design patterns are reusable, general, abstract solutions to common problems in software development.\cite{sm-designpatterns} Design patterns are meant to be used when there no problems actually exist -- doing so would cause excess undesired complexity.\cite{gof}\bs
 \\
 Throughout the exploration in this report, we will see that all the patterns loosely fit into three categories of benefits: performance optimization, readability/maintainability improvement, organization/structure/scalability improvement. We use these three categories to evaluate the usefulness of the design patterns in game development. (TODO:)
 
@@ -251,9 +252,9 @@ Avoid antipatterns as much as possible. Exploring the negative effects of antipa
 
 \subsubsection{Gang of Four}
 
-In software development, the phrase ``Gang of Four'' refers to the four authors of the Design Patterns book, Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides\cite{gof-wiki}. The book features the most common design patterns widely in use today.\bs
+In software development, the phrase ``Gang of Four'' refers to the four authors of the Design Patterns book, Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides\cite{gof-wiki}\cite{gof}. The book features the most common design patterns widely in use today.\bs
 \\
-The design patterns featured in the book outlines the classical design patterns. Thus, many patterns would not be applicable as more recent revisions of programming languages (Python, c++11, etc.). This is because design patterns are inheritantly solutions / workarounds to limitations of the programming language. As there are more improvement in the usability of the language, certain design patterns (such as the \textit{template} pattern) are implemented less as it's less complex, less error prone, and easier to use the existing features built-in to a language.
+The design patterns featured in the book outlines the classical design patterns. Thus, many patterns would not be applicable as more recent revisions of programming languages (Python, c++11, etc.). This is because design patterns are inherently solutions / workarounds to limitations of the programming language. As there are more improvement in the usability of the language, certain design patterns (such as the \textit{template} pattern) are implemented less as it's less complex, less error prone, and easier to use the existing features built-in to a language.
 
 
 \section{Creational Design Patterns}
@@ -264,7 +265,7 @@ Creational design patterns involves with object creation.\cite{sm-creationaldp} 
 
 In object oriented programming (OOP), the construction of a class instance takes parameters. It is possible that we need a lot of parameters to satisfy more variants of the class. This introduces the telescoping constructor antipattern\cite{telescopingconstructor}, where there are numerous variations of constructor methods all delegate to the default constructor. This chains the different constructors together like an upside-down cake, or a telescope shape.\bs
 \\
-The code is hard to maintain and difficult to use. When creating a new instance (invoking the constructor), it's hard to tell what the actual paramters are if they have the same type. Using default parameters is useful but makes code less usable as it changes the parameter ordering.\bs
+The code is hard to maintain and difficult to use. When creating a new instance (invoking the constructor), it's hard to tell what the actual parameters are if they have the same type. Using default parameters is useful but makes code less usable as it changes the parameter ordering.\bs
 \\
 The \textbf{builder pattern} encapsulates the parameters into a single structure. The structure itself is then passed into the constructor method, where we can access the data inside the structure again. The members of the structure can be accessed and modified by name, thereby eliminating the ambiguity of telescoping constructor.\bs
 \\
@@ -345,7 +346,7 @@ As the name suggests, the \textit{simple factory} is as simple as a factory coul
 \\
 A real life analogy would be purchasing a burger: the client requests one burger, and the restaurant makes the burger and give it to the client. Without the factory design pattern, the client would need to gather all the ingredients of the burger and make it themselves, which is repetitive and unproductive.\bs
 \\
-(Simple factory in game developement ehhhhh).\bs
+(Simple factory in game development ehhhhh).\bs
 \\
 A sample code for this pattern is available in section \ref{code:simple-factory}.\bs
 \\
@@ -431,15 +432,15 @@ The object pool is a creational design pattern that caches objects for re-use. A
 % TODO:
 % An example of the object pool design pattern would be (StateStream from simulation threads to rendering threads).
 
-(Objective markers that need to be displayed on the screen: they are persistent in the world, but not all of them needs to be displayed all the time. Only the ones inside players' camera frustrum are rendered. But that does not mean we should destroy other markers as it would be more expensive to create them again, and could cause performance issues if the player looks around too fast (spinning). So we return the instance of the marker when they're no longer being rendered to the object pool. They will be accessible and can be rendered again when players' camera puts these markers into view.)
+(Objective markers that need to be displayed on the screen: they are persistent in the world, but not all of them needs to be displayed all the time. Only the ones inside players' camera frustum are rendered. But that does not mean we should destroy other markers as it would be more expensive to create them again, and could cause performance issues if the player looks around too fast (spinning). So we return the instance of the marker when they're no longer being rendered to the object pool. They will be accessible and can be rendered again when players' camera puts these markers into view.)
 
 \subsection{Prototype}
 
 The \textit{prototype} design pattern helps when we need to create an object that is similar to an existing one, but instantiating a new instance is relatively expensive.\bs
 \\
-For instance, suppose we have a procedrally generated 3D model of a rock and we want to clone this model all over the place $N$ times.\bs
+For instance, suppose we have a procedurally generated 3D model of a rock and we want to clone this model all over the place $N$ times.\bs
 \\
-We could just generate $N$ rocks like how we generated the first one using the same random seed.\footnote{Procedurally generation relies on pseudo-random or noise, which are based off of a seed.} The problem is for every clone of the rock, there are computational overheads that hinders efficiency: such as re-computing the normal vectors from all the faces of the polygon, or recalculating teh UV coordinates for the texture.\bs
+We could just generate $N$ rocks like how we generated the first one using the same random seed.\footnote{Procedurally generation relies on pseudo-random or noise, which are based off of a seed.} The problem is for every clone of the rock, there are computational overheads that hinders efficiency: such as re-computing the normal vectors from all the faces of the polygon, or recalculating the UV coordinates for the texture.\bs
 \\
 Using the prototype design pattern, we implement a clone method to the rock object that copies all its data to a new instance, thereby avoiding the re-computation overheads.
 
@@ -449,9 +450,9 @@ The singleton pattern involves creating a single instance of a class and make su
 \\
 In game development, singletons can be used for for system managers. i.e. a single manager class that overlooks and orchestrates UI system or a system to track achievements. (see section \ref{ssection:ecs} for component-entity-system architecture where a single system manages multiple objects).\bs
 \\
-Singletons are also useful for configuration classes and shared resource accessing classes.\cite{ood-singleton} An example in game development is levels and personalization libraries (customizations) where we load them into memory during loading screen initially. After-which their instance can be accessed via a static function call.\bs
+Singletons are also useful for configuration classes and shared resource accessing classes.\cite{ood-singleton} An example in game development is levels and personalization libraries (customization) where we load them into memory during loading screen initially. After-which their instance can be accessed via a static function call.\bs
 \\
-Typical singleton class implemantion holds a static reference to itself and a static getter that returns that reference (figure \ref{fig:singleton}). In singleton implementations, concept of \textit{Lazy implentations}, where we do not initialize and allocate the memory for the object until client actually requests it.
+Typical singleton class implementation holds a static reference to itself and a static getter that returns that reference (figure \ref{fig:singleton}). In singleton implementations, concept of \textit{Lazy implementation}, where we do not initialize and allocate the memory for the object until client actually requests it.
 
 \begin{figure}[H]
 	\centering
@@ -470,9 +471,9 @@ Typical singleton class implemantion holds a static reference to itself and a st
 	\label{fig:singleton}
 \end{figure}
 
-An example of Singleton implementation for an simple acheivement tracker in sample code in section \ref{code:singleton}.
+An example of Singleton implementation for an simple achievement tracker in sample code in section \ref{code:singleton}.
 
-\section{Behaviour Design Patterns}
+\section{Behavior Design Patterns}
 
 TODO:
 
@@ -497,7 +498,7 @@ Another chain of command pattern observed in the Forstbite engine editor, is han
 
 Decouples action request and action handlers. The callee who makes the request makes no assumptions about the class the receives the command. Effectively decoupling them.
 \bs
-This opens up more flexibility in mapping a requets to a handler. An example is remappable input handling. Instead of listening for a key press, then calling a specific function that the key press corresponds to. It invokes a command object that holds a reference to the \textit{real object} so that the handler can be called.
+This opens up more flexibility in mapping a requests to a handler. An example is re-mappable input handling. Instead of listening for a key press, then calling a specific function that the key press corresponds to. It invokes a command object that holds a reference to the \textit{real object} so that the handler can be called.
 \bs
 In between we could do more things. For instance, keep track of how many times the action has requested.
 \bs
@@ -554,13 +555,54 @@ TODO:
 (Desc. of observer)
 The observer design pattern is ubiquitous to software development. Observers define a one-to-many dependency where many clients can ``subscribe'' to a state change of a particular object. The clients would be notified by the broadcast sent by the subscribed object.\bs
 \\
-(How observer works)
-In observer pattern, the object sending the events is the \textit{subject}, and the objects receiving are the \textit{observer}. The observer hierarchy  consists of an abstract \textit{observer} base class,
+In observer pattern, the object sending the events is the \textit{subject}, and the objects receiving are the \textit{observer}. The observer hierarchy consists of an abstract \textit{observer} base class, which has some handler (see figure \ref{fig:observer-simple}).
 
+\begin{figure}[H]
+	\centering
 
-(How it's applied in games)
+	\scalebox{0.75}{
+		\begin{tikzpicture}
+			\begin{class}[text width=8cm]{Subject}{0,0}
+				\attribute{-observers: ObserverBase[]}
+				\operation{+Subject():}
+				\operation{+RegisterObserver(ObserverBase *observer):}
+				\operation{+UnregisterObserver(ObserverBase *observer):}
+				\operation{-fireEvent(...):}
+			\end{class}
+
+			\begin{interface}{ObserverBase}{0,-5}
+				\operation[0]{+handleEvent(...);}
+			\end{interface}
+
+			\begin{class}{ConcreteObserver}{0, -8}
+				\implement{ObserverBase}
+				\operation{+handleEvent(...):}
+			\end{class}
+
+			\draw[->](Subject)--node[right, black]{$<<$broadcasts$>>$}(ObserverBase);
+		\end{tikzpicture}
+	}
+
+	\caption{Simple subject-object relationship in observer design pattern}
+	\label{fig:observer-simple}
+\end{figure}
+
+Without using any mediators, the subject is \textit{loosely coupled}\footnote{Loose coupling means dependency to another object via interface or abstract class. Whereas tight coupling means dependency to the concrete class directly.} to the observer types. The subject holds a collection or list of registered observers, such that when an event should be fired, the subject iterates through all the observers and deliver the event.\bs
+\\
+The client is responsible for managing the observers' lifetime. The client or observers are responsible for when to register or unregister to a subject. In essence, the subject makes no assumption about its observers. (Similar to the relationship in model-view-controller where the controller act as observer to the view to enable user interaction - see section \ref{ssection:ecs}).\bs
+\\
+(How it's used in games)
+In Frostbite (and extends to many game engines and software), many OOP and inter-class relationship relies on events. A player's interaction with the controller, keyboard, or mouse triggers input events to be handled by the Input Handler. For example shown in figure \ref{fig:unreal-input}, the subject are objects that outputs an event whenever certain key is pressed (red blocks). The output event \textit{Released} is hooked up to some observer. The corresponding observers are the \textit{Move Updated Component} handlers that carries out specific tasks whenever it receives the event/signal.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.49\textwidth]{assets/unreal-input}
+	\caption{Example of event connections in Unreal Engine which is based on the observer design pattern}
+	\label{fig:unreal-input}
+\end{figure}
 
 (How it benefits)
+It avoids the antipattern of \textit{spaghetti code} where increase in complexity of the software leads to exponential increase in complexity and unmaintainable code. The design pattern is very useful for organization, maintainability, and scalability of code.
 
 \subsection{Visitor}
 TODO:
@@ -571,16 +613,16 @@ TODO:
 \subsection{Adapter}
 TODO:
 
-A middle layer that transforms the interface of a desired object (usually provided by libraries) to work with client.
+A middle layer that transforms the interface of a desired object (usually provided by libraries) to work with client.\bs
+\\
+
 
 \textbf{Difference Between Adapter and Mediator}\bs
 \\
 
 Different from \textit{mediators} (section \ref{ssection:mediator}), as mediator manages the communication between two classes, essentially decouples the interaction of the two. Whereas adapter simply translates.
 \bs
-Consider a real life analogy, where two people who speak different languages are fighting. A mediator would be a lawyer such that the two people don't talk to each other directly. An adapter would be a translator so that the two can communicate more directly.
-\bs
-Thus, adapter is structural. And Mediator is behavioral.
+Consider a real life analogy, where two people who speak different languages are fighting. A mediator would be a lawyer such that the two people don't talk to each other directly. An adapter would be a translator so that the two can communicate more directly. Thus, adapter is structural. And Mediator is behavioral.
 
 \subsection{Bridge}
 TODO:
