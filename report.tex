@@ -366,51 +366,52 @@ Of course, the abstract factory could be generalized to various mechanisms withi
 
 \begin{figure}[!ht]
 	\centering
-	\scalebox{0.5}{
+	\scalebox{0.55}{
 		\begin{tikzpicture}
 			\tikzstyle{every node}=[font=\small]
-			\begin{interface}{AbstractFactory}{0 ,0}
-				\operation[0]{+ CreateProductA () }
-				\operation[0]{+ CreateProductB () }
+			\begin{interface}{AbstractFactory}{0, 0}
+				\operation[0]{+CreateProductA()}
+				\operation[0]{+CreateProductB()}
 			\end{interface}
-			\begin{class}{ConcreteFactory2}{-3, -4}
+			\begin{class}{ConcreteFactory2}{-3, -3}
 				\implement{AbstractFactory}
-				\operation{+ CreateProductA () }
-				\operation{+ CreateProductB () }
+				\operation{+CreateProductA()}
+				\operation{+CreateProductB()}
 			\end{class}
-			\begin{class}{ConcreteFactory1}{3, -4}
+			\begin{class}{ConcreteFactory1}{3, -3}
 				\implement{AbstractFactory}
-				\operation{+ CreateProductA () }
-				\operation{+ CreateProductB () }
+				\operation{+CreateProductA()}
+				\operation{+CreateProductB()}
 			\end{class}
-			\begin{class}{AbstractProductA}{15 , -2}
+			\begin{class}{AbstractProductA}{14, -2}
 			\end{class}
-			\begin{class}{ProductA1}{12 , -4}
+			\begin{class}{ProductA1}{11 , -4}
 				\implement{AbstractProductA}
 			\end{class}
-			\begin{class}{ProductA2}{18 , -4}
+			\begin{class}{ProductA2}{17 , -4}
 				\implement{AbstractProductA}
 			\end{class}
-			\draw[umlcd style dashed line , ->] (ConcreteFactory1) -- node [ above ,sloped , black ]{$<<$instantiate$>>$} ( ProductA1) ;
-			\draw[umlcd style dashed line , ->] (ConcreteFactory2.south) ++(1, 0) -- ++(0 , -1) -- node [ above , sloped ,black ]{$<<$instantiate$>>$} ++(20 ,0) -| ( ProductA2);
-			\begin{class}{AbstractProductB}{15 , -8}
+			\draw[umlcd style dashed line, ->](ConcreteFactory1)--node[above, black]{$<<$instantiate$>>$}(ProductA1);
+			\draw[umlcd style dashed line, ->](ConcreteFactory2.south)++(1, 0)--++(0, -0.7)--node[above, sloped, black]{$<<$instantiate$>>$}++(19 ,0)-|(ProductA2);
+
+			\begin{class}{AbstractProductB}{14, -6}
 			\end{class}
-			\begin{class}{ProductB1}{12 , -11}
+			\begin{class}{ProductB1}{11, -8}
 				\implement{AbstractProductB}
 			\end{class}
-			\begin{class}{ProductB2}{18 , -11}
+			\begin{class}{ProductB2}{17, -8}
 				\implement{AbstractProductB}
 			\end{class}
-			\draw[ umlcd style dashed line , ->] (ConcreteFactory1) |- node [ above ,sloped , black ]{$ < <$ instantiate $ > >$} ( ProductB1) ;
-			\draw[ umlcd style dashed line , ->] (ConcreteFactory2.south) ++( -1 ,0) -- ++(0 , -7) -- node [ above , sloped , black ]{$ < <$ instantiate $ > >$} ++(20 ,0) -| ( ProductB2) ;
-			\begin{class}{Client}{22 , -0.5}
+			\draw[umlcd style dashed line, ->](ConcreteFactory1)|- node[above, sloped, black]{$<<$instantiate$>>$}(ProductB1);
+			\draw[umlcd style dashed line, ->](ConcreteFactory2.south)++(-1 ,0)--++(0, -5)--node [above, sloped, black]{$<<$instantiate$>>$}++(20, 0)-|(ProductB2);
+			\begin{class}{Client}{21, -0.5}
 			\end{class}
-			\draw[ umlcd style dashed line , ->] (Client) -- node [ above , sloped , black ]{$ < <$ import $ > >$} (AbstractFactory);
-			\draw[ umlcd style dashed line , ->] (Client) |- node [ above , sloped , black ]{$ < <$ import $ > >$} (AbstractProductA);
-			\draw[ umlcd style dashed line , ->] (Client) |- node [ above , sloped , black ]{$ < <$ import $ > >$} (AbstractProductB);
+			\draw[umlcd style dashed line, ->](Client)--node[above, sloped, black]{$<<$import$>>$}(AbstractFactory);
+			\draw[umlcd style dashed line, ->](Client)|-node[above, sloped, black]{$<<$import$>>$}(AbstractProductA);
+			\draw[umlcd style dashed line, ->](Client)|-node[above, sloped, black]{$<<$import$>>$}(AbstractProductB);
 		\end{tikzpicture}
 	}
-	\caption{A generic UML diagram of abstract factory pattern}
+	\caption{A generic UML diagram of abstract factory pattern (source: pfg-umlcd documentation\cite{ctan-abstract-factory})}
 	\label{fig:abstract-factory}
 \end{figure}
 
@@ -620,7 +621,6 @@ It could be argued that a ``controllable'' component could exist to make certain
 \\
 Objects could also inherit components that made them aware of inputs such as mouse. Before Frostbite uses input trees and hit-zone entities, certain UI element could attach mouse interaction components to make them respond to mouse events such as hover, enter and leaving hitzones, click, etc.\bs
 \\
-
 
 Update calls can be queued for all objects at once. Update states can be cached. Cached data are much faster.
 
