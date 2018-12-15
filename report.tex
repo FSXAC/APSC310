@@ -550,9 +550,7 @@ Command passes a request from the client to be handled while memento passes its 
 \\
 
 \subsection{Observer}
-TODO:
 
-(Desc. of observer)
 The observer design pattern is ubiquitous to software development. Observers define a one-to-many dependency where many clients can ``subscribe'' to a state change of a particular object. The clients would be notified by the broadcast sent by the subscribed object.\bs
 \\
 In observer pattern, the object sending the events is the \textit{subject}, and the objects receiving are the \textit{observer}. The observer hierarchy consists of an abstract \textit{observer} base class, which has some handler (see figure \ref{fig:observer-simple}).
@@ -591,18 +589,20 @@ Without using any mediators, the subject is \textit{loosely coupled}\footnote{Lo
 \\
 The client is responsible for managing the observers' lifetime. The client or observers are responsible for when to register or unregister to a subject. In essence, the subject makes no assumption about its observers. (Similar to the relationship in model-view-controller where the controller act as observer to the view to enable user interaction - see section \ref{ssection:ecs}).\bs
 \\
-(How it's used in games)
 In Frostbite (and extends to many game engines and software), many OOP and inter-class relationship relies on events. A player's interaction with the controller, keyboard, or mouse triggers input events to be handled by the Input Handler. For example shown in figure \ref{fig:unreal-input}, the subject are objects that outputs an event whenever certain key is pressed (red blocks). The output event \textit{Released} is hooked up to some observer. The corresponding observers are the \textit{Move Updated Component} handlers that carries out specific tasks whenever it receives the event/signal.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.49\textwidth]{assets/unreal-input}
-	\caption{Example of event connections in Unreal Engine which is based on the observer design pattern}
+	\caption{Example of event connections in Unreal Engine which is based on the observer design pattern. \cite{gfs-input}}
 	\label{fig:unreal-input}
 \end{figure}
 
-(How it benefits)
-It avoids the antipattern of \textit{spaghetti code} where increase in complexity of the software leads to exponential increase in complexity and unmaintainable code. The design pattern is very useful for organization, maintainability, and scalability of code.
+It avoids the antipattern of \textit{spaghetti code} where increase in complexity of the software leads to exponential increase in complexity and unmaintainable code. The design pattern is very useful for organization, maintainability, flexibility, and scalability of code.\bs
+\\
+There are several approach to the implementation. Mainly, the subject could push data to observers during the function call. Or the observers could pull data from the subject. The observers could receive a subject pointer during construction and register themselves, or a client could register the observers for them. Nonetheless, the observer pattern is flexible and fit many needs in video game programming.\bs
+\\
+A sample code of an observer pattern example is in section \ref{code:observer}. In this example, we created a simple system to broadcast world events to a multiplayer game.
 
 \subsection{Visitor}
 TODO:
@@ -708,18 +708,33 @@ TODO:
 \subsection{Builder}
 \lstinputlisting[language=C++, firstline=5]{code/Builder.hpp}\label{code:builder}
 
-\subsection{Composition over Inheritance}
+\subsection{Composition Over Inheritance}
 \subsubsection{Components}
 \lstinputlisting[language=C++, lastline=26]{code/CompositionOverInheritance_1.hpp}\label{code:coi-component}
 \subsubsection{Usage}
 \lstinputlisting[language=C++, firstline=28]{code/CompositionOverInheritance_1.hpp}\label{code:coi-usage}
 
+\subsection{Observer}\label{code:observer}
+\subsubsection{Subject Abstract Observer Class}
+The simple implementation of a observer pattern is as follows. Notice that the subject is loosely coupled to the observer. But the observer is tightly coupled to the subject.
+\lstinputlisting[language=C++, lastline=72]{code/Observer.hpp}
+\subsubsection{Concrete Observers}
+Here are some examples of concrete observers that inherits the observer base class. They override the virtual \texttt{handleEvent} method to handle whatever they're designed to do. In this case, any instances of \textit{ZeroObservers} registered to a subject would print out ``Subject received data=0'' whenever the something calls subject's \texttt{setData()} method and passes in 0.
+\lstinputlisting[language=C++, firstline=74, lastline=94]{code/Observer.hpp}
+For more flexible applications, the observer also could also get a subject pointer and pull the data from the subject upon an event. Consider the following concrete observer class:
+\lstinputlisting[language=C++, firstline=96, lastline=108]{code/Observer.hpp}
+We invoke \texttt{getSubject()} method (to ensure we can make no changes to the subject itself) and call the getter directly.
+\lstinputlisting[language=C++, firstline=111]{code/Observer.hpp}
+
+
 \subsection{Simple Factory}
 \lstinputlisting[language=C++, firstline=3, lastline=59]{code/Factories.hpp}\label{code:simple-factory}
-\subsubsection{Not using factory}
+\subsubsection{Not Using Factory}
+Not only that we need to create the objects at first, we also need to ensure that every object is properly initialized correctly. In this case, we're using a for-loop. However, one can see that as number of things to initialize increase, and initialization gets more complex, the client would need to do much more work.
 \lstinputlisting[language=C++, firstline=62, lastline=71]{code/Factories.hpp}
-\subsubsection{Using factory}
-\lstinputlisting[language=C++, firstline=73, lastline=76]{code/Factories.hpp}
+\subsubsection{Using Factory}
+Notice that the initialization logic is hidden away at this level. So using the code is much simpler.
+\lstinputlisting[language=C++, firstline=73, lastline=79]{code/Factories.hpp}
 
 \subsection{Singleton}
 \lstinputlisting[language=C++]{code/Singleton.hpp}\label{code:singleton}
