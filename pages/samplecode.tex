@@ -1,0 +1,38 @@
+\section{Sample Code}
+
+\subsection{Abstract Factory}
+\lstinputlisting[language=C++, firstline=79, lastline=116]{code/Factories.hpp}\label{code:abstract-factory}
+
+\subsection{Builder}
+\lstinputlisting[language=C++, firstline=5]{code/Builder.hpp}\label{code:builder}
+
+\subsection{Composition Over Inheritance}
+\subsubsection{Components}
+\lstinputlisting[language=C++, lastline=26]{code/CompositionOverInheritance_1.hpp}\label{code:coi-component}
+\subsubsection{Usage}
+\lstinputlisting[language=C++, firstline=28]{code/CompositionOverInheritance_1.hpp}\label{code:coi-usage}
+
+\subsection{Observer}\label{code:observer}
+\subsubsection{Subject Abstract Observer Class}
+The simple implementation of a observer pattern is as follows. Notice that the subject is loosely coupled to the observer. But the observer is tightly coupled to the subject.
+\lstinputlisting[language=C++, lastline=72]{code/Observer.hpp}
+\subsubsection{Concrete Observers}
+Here are some examples of concrete observers that inherits the observer base class. They override the virtual \texttt{handleEvent} method to handle whatever they're designed to do. In this case, any instances of \textit{ZeroObservers} registered to a subject would print out ``Subject received data=0'' whenever the something calls subject's \texttt{setData()} method and passes in 0.
+\lstinputlisting[language=C++, firstline=74, lastline=94]{code/Observer.hpp}
+For more flexible applications, the observer also could also get a subject pointer and pull the data from the subject upon an event. Consider the following concrete observer class:
+\lstinputlisting[language=C++, firstline=96, lastline=108]{code/Observer.hpp}
+We invoke \texttt{getSubject()} method (to ensure we can make no changes to the subject itself) and call the getter directly.
+\lstinputlisting[language=C++, firstline=111]{code/Observer.hpp}
+
+
+\subsection{Simple Factory}
+\lstinputlisting[language=C++, firstline=3, lastline=59]{code/Factories.hpp}\label{code:simple-factory}
+\subsubsection{Not Using Factory}
+Not only that we need to create the objects at first, we also need to ensure that every object is properly initialized correctly. In this case, we're using a for-loop. However, one can see that as number of things to initialize increase, and initialization gets more complex, the client would need to do much more work.
+\lstinputlisting[language=C++, firstline=62, lastline=71]{code/Factories.hpp}
+\subsubsection{Using Factory}
+Notice that the initialization logic is hidden away at this level. So using the code is much simpler.
+\lstinputlisting[language=C++, firstline=73, lastline=79]{code/Factories.hpp}
+
+\subsection{Singleton}
+\lstinputlisting[language=C++]{code/Singleton.hpp}\label{code:singleton}

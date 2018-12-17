@@ -1,0 +1,32 @@
+\section{Architectural Patterns}
+
+TODO:
+
+\subsection{Entity-Component-System}\label{ssection:ecs}
+
+Used in physic engines, and when there are a lot of things to handle.
+
+% CHANGED: not used too much in UI
+% In UI Systems as there are also lots of things to handle. UI widgets do not necessary need to interact with other UI widgets. So using this architecture enables performance optimizations.
+
+Other examples include making certain objects in the physics engine adopt a characteristic: i.e. solid/has collision, soft body/hard body, and other physics-aware components.\bs
+\\
+It could be argued that a ``controllable'' component could exist to make certain object player-controllable (i.e player characters, car, etc.).\bs
+\\
+Objects could also inherit components that made them aware of inputs such as mouse. Before Frostbite uses input trees and hit-zone entities, certain UI element could attach mouse interaction components to make them respond to mouse events such as hover, enter and leaving hitzones, click, etc.\bs
+\\
+
+Update calls can be queued for all objects at once. Update states can be cached. Cached data are much faster.
+
+\subsubsection{Composition over Inheritance}
+
+TODO:
+OOP principle that makes inheritance based on composition / behavior rather than inheritance from parent.
+\bs
+Consider code in section \ref{code:coi-component}, rather than defining class by their ``likeness'', we define it by its function.
+\bs
+Then in 
+
+\subsection{Model-View-Controller}
+
+TODO: Mostly used in UI development. 

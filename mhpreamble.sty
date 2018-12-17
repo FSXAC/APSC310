@@ -1,0 +1,88 @@
+\ProvidesPackage{mhpreamble}
+
+% Packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{breakurl}
+\usepackage[superscript]{cite}
+\usepackage{draftwatermark}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{import}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{nth}
+% \usepackage[default,scale=1.0]{opensans}
+\usepackage{pgf-umlcd}
+\usepackage{setspace}
+\usepackage{siunitx}
+\usepackage{svg}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{url}
+
+% Custom commands
+\newcommand{\ts}{\textsubscript}
+\newcommand{\bs}{\bigskip}
+
+% Global Vars
+\newcommand{\titletext}{Exploration of Design Patterns in Game Development}
+
+% Change color of UML diagrams
+\renewcommand{\umltextcolor}{black}
+\renewcommand{\umldrawcolor}{black}
+\renewcommand{\umlfillcolor}{white}
+
+% Use different symbols for footnotes to avoid ambiguity with citations
+\renewcommand{\thefootnote}{\roman{footnote}}
+
+% Double spacing
+% \doublespacing
+
+% Watermark
+\SetWatermarkText{Draft}
+\SetWatermarkScale{5}
+\SetWatermarkColor[gray]{0.95}
+
+% Use hyphans to break up urls
+\def\UrlBreaks{\do\/\do-}
+
+% Hyper ref setup
+\hypersetup{
+	colorlinks=true,
+	citecolor=black,
+	linkcolor=black,
+	filecolor=black,
+	% urlcolor=blue,
+	urlcolor=black,
+	pdftitle={APSC 310 Technical Report - Muchen He},
+	bookmarks=true
+}
+\urlstyle{same}
+
+% Page semantics
+\pagestyle{fancy}
+
+% Header
+\fancyhead[L]{\MakeUppercase{APSC 310}}
+\fancyhead[R]{Muchen He}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+
+% Page indent
+\parindent 0ex
+
+% Listings style
+\lstdefinestyle{codestyle}{
+	basicstyle=\footnotesize,
+	frame=single,
+	tabsize=4
+}
+\lstset{style=codestyle}
