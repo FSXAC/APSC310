@@ -1,19 +1,35 @@
 \section{Structural Design Patterns}
-TODO:
+
+% Two columns start
+\iftwocolumns
+\begin{multicols}{2}
+\fi
+
+Structural design patterns are generally utilized to help organizing the structure and relationship of objects.
 
 \subsection{Adapter}
-TODO:
 
+An adapter is a structural design pattern that wraps an incompatible object such that it can be used/interfaced by the client.\cite{sm-adapter}. Such pattern is commonly used to integrate third party \textit{application program interface} (API) or libraries into the project. In other words, an adapter will take something that has already been designed or built that would not work with current solution, ``retrofit" around that and make unrelated classes work together.\cite{sm-adapter}\bs
+\\
 A middle layer that transforms the interface of a desired object (usually provided by libraries) to work with client.\bs
 \\
-
+An example used in game right now is adapting data from local client to an online database. Suppose we have some  player persistence data for an online game stored on a database in a form of a JSON object. When we fetch the player data from the server to be used in gameplay, the JSON object would need to be ``parsed'' to some usable object in C++. Thus an adapter would be used to read the JSON and populate another object with one-to-one mapping.\bs
+\\
+When we change the player data locally, we then need another adapter to serialize the data in the client player object to JSON such that it can be posted to the database again.\bs
+\\
+Another example would be adapting file formats such as 3D model objects and texture formats such as textures.\bs
+\\
+In appendix section \ref{code:adapter}, I demonstrate one of the simplest form of an adapter. Suppose we utilize a graphics library that has a rectangle drawing function that takes the parameter of \texttt(int x, int y, int w, int h) where they represent x-coordinate, y-coordinate, width, and height respectively. But our client code, instead of knowing the width and height of the rectangle, knows the x and y-coordinate of the opposite corner. Of course, the client could do the conversion itself, but the implementation could get more complex and repetitive as we deal with more complex interfaces.\bs
+\\
+In essence, the adapter design pattern is beneficial in game development to fit incompatible parts to the project. Thereby reduces development time that it would take for re-implementation.\bs
+\\
 
 \textbf{Difference Between Adapter and Mediator}\bs
 \\
 
-Different from \textit{mediators} (section \ref{ssection:mediator}), as mediator manages the communication between two classes, essentially decouples the interaction of the two. Whereas adapter simply translates.
+Note that adapters are different from \textit{mediators} (section \ref{ssection:mediator}), as mediator manages the communication between two classes, essentially decouples the interaction of the two. Whereas adapter simply translates.
 \bs
-Consider a real life analogy, where two people who speak different languages are fighting. A mediator would be a lawyer such that the two people don't talk to each other directly. An adapter would be a translator so that the two can communicate more directly. Thus, adapter is structural. And Mediator is behavioral.
+Consider a real life analogy, where two people who speak different languages are fighting. A mediator would be a lawyer such that the two people don't talk to each other directly. An adapter would be a translator so that the two can communicate more directly. Thus, adapters are structural and mediators are behavioral.
 
 \subsection{Bridge}
 TODO:
@@ -35,4 +51,12 @@ TODO:
 \subsection{Proxy}
 TODO:
 
+
+
 Smart pointers, etc.
+
+
+% Two columns end
+\iftwocolumns
+\end{multicols}
+\fi
