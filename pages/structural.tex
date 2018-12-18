@@ -62,8 +62,45 @@ Note that all the derived classes share some commonalities. In particular, any d
 \fi
 
 \subsection{Composite}
-TODO:
-Useful in architectures such as component-entity-systems model which centers around the idea of ``\textit{composition over inheritance}" (section \ref{ssection:ecs}).
+TODO: The composite design pattern allow objects to be composed into nested hierarchies or tree structures. The client can treat the composited object or the composition of objects the same way.\cite{sm-composite}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{assets/composite-sm}
+	\caption{Simple structure of composite design pattern\cite{sm-composite}}
+	\label{fig:composite}
+\end{figure}
+
+As seen in figure \ref{fig:composite}, the client would interact with the root interface \textit{Component}. The derived \textit{Composite} class holds a list of elements with the type \textit{Component} such that a recursive/tree-like structure could be constructed. Alongside, the the derived \textit{Leaf} class has more unique data and behaviors, but still desired to be part of the composition.\bs
+\\
+The result is that we can have nested relationships abstracted. The interface allows all nested classes to be treated the same by the client. Such as the example shown in figure \ref{fig:composite-arith} of a composited mathematical expression. Since the composite is recursive, the interface could expose a single call to the client to evaluate all children composites and leaf objects.\bs
+\\
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{assets/composite-arith}
+	\caption{Composite pattern used for representing mathematical expression\cite{sm-composite}}
+	\label{fig:composite-arith}
+\end{figure}
+
+The composite pattern is apparent in UI layouts. For instance, a standard desktop application window has the main window widget itself, but it has nested components inside it. These nested components are also sometimes expected to hold items inside themselves. As seen in figure \ref{fig:submenus}, the main window has a menu bar, the menu bar contains menu buttons which open to another list of menus and the nesting goes on.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{assets/submenus}
+	\caption{Composite pattern in menu systems in UI}
+	\label{fig:submenus}
+\end{figure}
+
+Similar ideas apply to in-game UIs, where elements that composes the game UI are made of smaller components known as \textit{UIWidgets}. Designers put multiple UIWidgets together, sometimes reusing existing ones to create a screen of UI, as seen in figure \ref{fig:anthem-forge}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{assets/anthem-forge}
+	\caption{UI menus in Anthem\cite{anthem-customization}}
+	\label{fig:anthem-forge}
+\end{figure}
+
+% Useful in architectures such as component-entity-systems model which centers around the idea of ``\textit{composition over inheritance}" (section \ref{ssection:ecs}).
 
 
 \subsection{Decorator}
