@@ -19,7 +19,7 @@ When we change the player data locally, we then need another adapter to serializ
 \\
 Another example would be adapting file formats such as 3D model objects and texture formats such as textures.\bs
 \\
-In appendix section \ref{code:adapter}, I demonstrate one of the simplest form of an adapter. Suppose we utilize a graphics library that has a rectangle drawing function that takes the parameter of \texttt(int x, int y, int w, int h) where they represent x-coordinate, y-coordinate, width, and height respectively. But our client code, instead of knowing the width and height of the rectangle, knows the x and y-coordinate of the opposite corner. Of course, the client could do the conversion itself, but the implementation could get more complex and repetitive as we deal with more complex interfaces.\bs
+In appendix section \ref{code:adapter}, I demonstrate one of the simplest form of an adapter. Suppose we utilize a graphics library that has a rectangle drawing function that takes the parameter of \texttt{(int x, int y, int w, int h)} where they represent x-coordinate, y-coordinate, width, and height respectively. But our client code, instead of knowing the width and height of the rectangle, knows the x and y-coordinate of the opposite corner. Of course, the client could do the conversion itself, but the implementation could get more complex and repetitive as we deal with more complex interfaces.\bs
 \\
 In essence, the adapter design pattern is beneficial in game development to fit incompatible parts to the project. Thereby reduces development time that it would take for re-implementation.\bs
 \\
@@ -27,12 +27,39 @@ In essence, the adapter design pattern is beneficial in game development to fit 
 \textbf{Difference Between Adapter and Mediator}\bs
 \\
 
-Note that adapters are different from \textit{mediators} (section \ref{ssection:mediator}), as mediator manages the communication between two classes, essentially decouples the interaction of the two. Whereas adapter simply translates.
-\bs
+Note that adapters are different from \textit{mediators} (section \ref{ssection:mediator}), as mediator manages the communication between two classes, essentially decouples the interaction of the two. Whereas adapter simply translates.\bs
+\\
 Consider a real life analogy, where two people who speak different languages are fighting. A mediator would be a lawyer such that the two people don't talk to each other directly. An adapter would be a translator so that the two can communicate more directly. Thus, adapters are structural and mediators are behavioral.
 
 \subsection{Bridge}
-TODO: Bridge decouples abstraction from its implementation which enables orthogonal hierarchies.
+TODO: Bridge decouples abstraction from its implementation which enables orthogonal hierarchies. Often bridge patterns are used to encapsulate classes that would need to work on multiple platforms, which require multiple implementations.\bs
+\\
+Consider a scenario where we have multiple types of subclasses that has an orthogonal property such as one depicted in figure \ref{fig:bridge-before}. Notice that if we were to add more types of guns or more gun attachments, the number of derived classes that need to be implemented grows geometrically. Resulting in highly un-maintainable and repetitive code.\bs
+\\
+Note that all the derived classes share some commonalities. In particular, any derived gun class inherits one of pistol, assault rifle, or LMG. And has modification of one of scope, suppressor, and ergonomic grip. By using the bridge pattern to decouple the implementation from the interface, we can make \textit{orthogonal hierarchies} (figure \ref{fig:bridge-after}) which is more manageable.\bs
+\\
+
+\iftwocolumns
+\end{multicols}
+\fi
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{assets/bridge-before}
+	\caption{Structure of orthogonal hierarchy before using bridge pattern}
+	\label{fig:bridge-before}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{assets/bridge-after}
+	\caption{Structure of orthogonal hierarchy after using bridge pattern}
+	\label{fig:bridge-after}
+\end{figure}
+
+\iftwocolumns
+\begin{multicols}{2}
+\fi
 
 \subsection{Composite}
 TODO:

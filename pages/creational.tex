@@ -166,10 +166,11 @@ Of course, the abstract factory could be generalized to various mechanisms withi
 \fi
 
 \subsection{Object Pool}
-
+The object pool is a creational design pattern that caches objects for re-use. An object pool can let clients check-out objects from the pool. If a requested object do not exist, the pool can create a new object; although expensive, it only occurs once.\bs
+\\
 An analogy in real life would be a library of books. When a client wants to access some information, instead of writing a new book to the client to use every time, which is expensive, we check if the book already exists in the library. Then we could lend the book to the client. When the client is finished, they return the book for other clients to checkout.\bs
 \\
-The object pool is a creational design pattern that caches objects for re-use. An object pool can let clients check-out objects from the pool. If a requested object do not exist, the pool can create a new object; although expensive, it only occurs once. Finally, using object pool better organizes object life time of the objects in the pool. Thus we can free memory by clean up unused objects periodically (often known as \textit{garbage collection}).\bs
+The object pool better organizes object life time of the objects in the pool. Thus we can free memory by clean up unused objects periodically (often known as \textit{garbage collection}).\bs
 \\
 % NOTE: textures cannot be used as example as they are more like flyweights
 % An example of this used in games are cached textures: 
@@ -178,6 +179,38 @@ The object pool is a creational design pattern that caches objects for re-use. A
 % An example of the object pool design pattern would be (StateStream from simulation threads to rendering threads).
 
 (Objective markers that need to be displayed on the screen: they are persistent in the world, but not all of them needs to be displayed all the time. Only the ones inside players' camera frustum are rendered. But that does not mean we should destroy other markers as it would be more expensive to create them again, and could cause performance issues if the player looks around too fast (spinning). So we return the instance of the marker when they're no longer being rendered to the object pool. They will be accessible and can be rendered again when players' camera puts these markers into view.)
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.49\textwidth]{assets/anthem-markers}
+	\caption{HUD UI markers from Anthem E3 Gameplay Demo\cite{anthem-e3}}
+	\label{fig:anthem-hud-markers}
+\end{figure}
+
+% One possible extended (more general) example(?) is culling\footnote{culling is hiding objects from rendering to improve performance} objects from rendering. Obviously since the player cannot see them when it's outside the view of the screen, we do not want to render them (shading, particles, textures) in order to improve performance. But re-creating the instances of world objects when player puts them into view again could be expensive, and cause stutter and lag when player looks around too fast. An object pool is applicable such that the objects that need to be rendered could be checked out, and returned when they no longer need to be rendered. See figure \ref{fig:culling} as an example for it used in Horizon Zero Dawn\cite{hzd}.\bs
+% \\
+
+% \iftwocolumns
+% \end{multicols}
+% \fi
+% \begin{figure}[H]
+% 	\centering
+% 	\begin{subfigure}[b]{0.4\textwidth}
+% 		\centering
+% 		\includegraphics[width=\textwidth]{assets/culling-1}
+% 	\end{subfigure}
+% 	~
+% 	\begin{subfigure}[b]{0.4\textwidth}
+% 		\centering
+% 		\includegraphics[width=\textwidth]{assets/culling-2}
+% 	\end{subfigure}
+
+% 	\caption{Culling of the world outside of player's field of view in the game Horizon Zero Dawn}
+% 	\label{fig:culling}
+% \end{figure}
+% \iftwocolumns
+% \begin{multicols}{2}
+% \fi
 
 \subsection{Prototype}
 
