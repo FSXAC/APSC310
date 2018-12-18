@@ -92,7 +92,7 @@ As the name suggests, the \textit{simple factory} is as simple as a factory coul
 \\
 A real life analogy would be purchasing a burger: the client requests one burger, and the restaurant makes the burger and give it to the client. Without the factory design pattern, the client would need to gather all the ingredients of the burger and make it themselves, which is repetitive and unproductive.\bs
 \\
-(Simple factory in game development ehhhhh).\bs
+Particle systems could be examples of simple factories used in games. Suppose we have a random sparks generator and each particle is an instance of the \textit{Particle} class which is managed by a \textit{ParticleSystem} parent class. The parent, in this case, act as a factory. The client simply tells the ParticleSystem when to start or stop emitting particles, the ParticleSystem then is responsible for the initialization logic of creating the particles such as setting random displacement and velocity, and random lifetimes.\bs
 \\
 A sample code for this pattern is available in section \ref{code:simple-factory}.\bs
 \\
