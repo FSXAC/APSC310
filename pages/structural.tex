@@ -32,7 +32,9 @@ Note that adapters are different from \textit{mediators} (section \ref{ssection:
 Consider a real life analogy, where two people who speak different languages are fighting. A mediator would be a lawyer such that the two people don't talk to each other directly. An adapter would be a translator so that the two can communicate more directly. Thus, adapters are structural and mediators are behavioral.
 
 \subsection{Bridge}
-TODO: Bridge decouples abstraction from its implementation which enables orthogonal hierarchies. Often bridge patterns are used to encapsulate classes that would need to work on multiple platforms, which require multiple implementations.\bs
+The \textit{bridge} pattern decouples abstraction from its implementation which enables orthogonal hierarchies. One could think of orthogonal hierarchies like orthogonal basis vectors from linear algebra. Using the basis vectors, we could construct any vector of the same domain using linear combination. Likewise for orthogonal hierarchies, the separation of interface and implementation allow us to have a combination of the different derived types.\bs
+\\
+The bridge patterns are notably used to encapsulate classes that would need to work on multiple platforms, which would require multiple implementations.\bs
 \\
 Consider a scenario where we have multiple types of subclasses that has an orthogonal property such as one depicted in figure \ref{fig:bridge-before}. Notice that if we were to add more types of guns or more gun attachments, the number of derived classes that need to be implemented grows geometrically. Resulting in highly un-maintainable and repetitive code.\bs
 \\
@@ -62,7 +64,7 @@ Note that all the derived classes share some commonalities. In particular, any d
 \fi
 
 \subsection{Composite}
-TODO: The composite design pattern allow objects to be composed into nested hierarchies or tree structures. The client can treat the composited object or the composition of objects the same way.\cite{sm-composite}.
+The composite design pattern allow objects to be composed into nested hierarchies or tree structures. The client can treat the composited object or the composition of objects the same way.\cite{sm-composite}.
 
 \begin{figure}[H]
 	\centering
@@ -101,7 +103,6 @@ Similar ideas apply to in-game UIs, where elements that composes the game UI are
 \end{figure}
 
 % Useful in architectures such as component-entity-systems model which centers around the idea of ``\textit{composition over inheritance}" (section \ref{ssection:ecs}).
-
 
 \subsection{Decorator}
 TODO: Decorators attach more behavior, states, or responsibilities to classes during runtime (dynamic).
