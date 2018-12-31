@@ -15,6 +15,19 @@
 \subsubsection{Usage}
 \lstinputlisting[language=C++, firstline=28]{code/CompositionOverInheritance_1.hpp}\label{code:coi-usage}
 
+\subsection{Decorator}\label{code:decorator}
+\subsubsection{Decorator Interface}
+The interface class establishes that both core and decorator classes would be a widget, and would be drawn to the screen.
+\lstinputlisting[language=C++, firstline=4, lastline=8]{code/Decorator.hpp}
+\subsubsection{Core}
+The core class, without any added ``decorations'' should hold a width, height, and some text information to display.
+\lstinputlisting[language=C++, firstline=10, lastline=31]{code/Decorator.hpp}
+\subsubsection{Decorator}
+The decorator classes holds a member with a type of widget interface such that it can delegate the \texttt{draw()} function call to the other decorator or core classes. In addition, the derived class also perform extra functionalities that is unique to that decorator class.
+\lstinputlisting[language=C++, firstline=33, lastline=65]{code/Decorator.hpp}
+\subsubsection{Usage}
+\lstinputlisting[language=C++, firstline=67, lastline=82]{code/Decorator.hpp}
+
 \subsection{Observer}\label{code:observer}
 \subsubsection{Subject Abstract Observer Class}
 The simple implementation of a observer pattern is as follows. Notice that the subject is loosely coupled to the observer. But the observer is tightly coupled to the subject.

@@ -105,7 +105,20 @@ Similar ideas apply to in-game UIs, where elements that composes the game UI are
 % Useful in architectures such as component-entity-systems model which centers around the idea of ``\textit{composition over inheritance}" (section \ref{ssection:ecs}).
 
 \subsection{Decorator}
-TODO: Decorators attach more behavior, states, or responsibilities to classes during runtime (dynamic).
+
+Consider the following problem: suppose we have a ``gift'' class whose purpose is to hold some intrinsic information about the gift, such as what it is and its value (i.e. an avocado, with value of \$1.20). However, there exists times when we need to delegate responsibilities the \textit{gift} class dynamically (during run-time), such as concealing the gift value or wrapping the gift and putting it in a box. In this case, the wrappers and boxes would be extra responsibilities delegated to the gift. However, we would not want to define this statically as it is not flexible (what if we want to different wrapping paper depending on the recipent). Thus, it would be wise to utilize the decorator design pattern.\bs
+\\
+As the name suggests, the decorator design pattern ``decorates'' around the class that we want to assign new responsibilities to. To apply this pattern in software, we first create an \textit{interface class} that holds the lowest common denominator attributes and functions of the \textbf{core class} (the class that holds the core functionalities) and the \textbf{decorator class} (the class that decorates the core classes). We then create the \textit{decorator} base class that implements the interface a level down. The interface allows programmers to establish a loosely coupled relationship in code, and being a base class opens the option for more decorator variations.\bs
+\\
+Note that both \textit{core} and \textit{decorator} classes extends the interface via ``is a'' relationship. In addition, \textit{decorator} holds a memeber variable of the interface type. This way, the decorator classes can actually perform the tasks that delegates to the core classes or more decorator classes.\bs
+\\
+Lastly, the client is responsible for managing the creation of the decorators as well as the composition of the decorator classes added to the core classes.\bs
+\\
+In games, such pattern is applicable in game assets that have the ability to be modified. To name a few, these game objects could be potion effects to playable or non-playable characters (NPCs) (figure \ref{fig:minecraft-potion-effect}), modifications to vehicles (figure \ref{fig:bf4-vehicle-mods}), or enchantment on tools or weapons (figure \ref{fig:minecraft-enchantments}).\bs
+\\
+The decorator is a structural design pattern to enhance the flexibility of OOP software by allowing extra behaviors to be attached to the core class during run-time. The decoupling of core class functionalities from the potential (but optional) decorator functionalities reduces the tedious need of programming every permutation of core and decorator classes. Thus, the codebase is more maintainable as well. The decorator design pattern shows no change in performance.\bs
+\\
+Sample code for an exmaple of how the decorator pattern is used in a generic UI scenario is available in section \ref{code:decorator}.
 
 \subsection{Facade}
 TODO: Facade is a single class that represents an entire system which provides better separation and abstraction. Improves code maintainability and decouples critical parts of a system from external interactions
