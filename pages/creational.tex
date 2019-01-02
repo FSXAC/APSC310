@@ -81,7 +81,7 @@ Of course, this pattern is applicable widely in game development, from in game o
 \\
 A sample code for this pattern is available in section \ref{code:builder}.
 
-\subsection{Factories}
+\subsection{Factories}\label{section:factories}
 
 Factory is a quintessential creational design pattern because it governs the creation of different types of objects at a scalable level. For programming games, memory allocation and management is tricky, therefore it is helpful to not expose that kind of control to the client code.\bs
 \\
@@ -187,30 +187,30 @@ The object pool better organizes object life time of the objects in the pool. Th
 	\label{fig:anthem-hud-markers}
 \end{figure}
 
-% One possible extended (more general) example(?) is culling\footnote{culling is hiding objects from rendering to improve performance} objects from rendering. Obviously since the player cannot see them when it's outside the view of the screen, we do not want to render them (shading, particles, textures) in order to improve performance. But re-creating the instances of world objects when player puts them into view again could be expensive, and cause stutter and lag when player looks around too fast. An object pool is applicable such that the objects that need to be rendered could be checked out, and returned when they no longer need to be rendered. See figure \ref{fig:culling} as an example for it used in Horizon Zero Dawn\cite{hzd}.\bs
-% \\
+One possible extended (more general) example(?) is culling\footnote{culling is hiding objects from rendering to improve performance} objects from rendering. Obviously since the player cannot see them when it's outside the view of the screen, we do not want to render them (shading, particles, textures) in order to improve performance. But re-creating the instances of world objects when player puts them into view again could be expensive, and cause stutter and lag when player looks around too fast. An object pool is applicable such that the objects that need to be rendered could be checked out, and returned when they no longer need to be rendered. See figure \ref{fig:culling} as an example for it used in Horizon Zero Dawn\cite{hzd}.\bs
+\\
 
-% \iftwocolumns
-% \end{multicols}
-% \fi
-% \begin{figure}[H]
-% 	\centering
-% 	\begin{subfigure}[b]{0.4\textwidth}
-% 		\centering
-% 		\includegraphics[width=\textwidth]{assets/culling-1}
-% 	\end{subfigure}
-% 	~
-% 	\begin{subfigure}[b]{0.4\textwidth}
-% 		\centering
-% 		\includegraphics[width=\textwidth]{assets/culling-2}
-% 	\end{subfigure}
+\iftwocolumns
+\end{multicols}
+\fi
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{assets/culling-1}
+	\end{subfigure}
+	~
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{assets/culling-2}
+	\end{subfigure}
 
-% 	\caption{Culling of the world outside of player's field of view in the game Horizon Zero Dawn}
-% 	\label{fig:culling}
-% \end{figure}
-% \iftwocolumns
-% \begin{multicols}{2}
-% \fi
+	\caption{Culling of the world outside of player's field of view in the game Horizon Zero Dawn}
+	\label{fig:culling}
+\end{figure}
+\iftwocolumns
+\begin{multicols}{2}
+\fi
 
 \subsection{Prototype}
 
@@ -226,7 +226,8 @@ Using the prototype design pattern, we implement a clone method to the rock obje
 
 The singleton pattern involves creating a single instance of a class and make sure that only one is created and used\cite{tp-singleton}. The singleton pattern provides a global accessor to the client such that it can be accessed everywhere. Thus, it is said singletons are glorified global variables.\cite{ood-singleton, sm-singleton}\bs
 \\
-In game development, singletons can be used for for system managers. i.e. a single manager class that overlooks and orchestrates UI system or a system to track achievements. (see section \ref{ssection:ecs} for component-entity-system architecture where a single system manages multiple objects).\bs
+In game development, singletons can be used for for system managers. i.e. a single manager class that overlooks and orchestrates UI system or a system to track achievements. 
+% (see section \ref{ssection:ecs} for component-entity-system architecture where a single system manages multiple objects).\bs
 \\
 Singletons are also useful for configuration classes and shared resource accessing classes.\cite{ood-singleton} An example in game development is levels and personalization libraries (customization) where we load them into memory during loading screen initially. After-which their instance can be accessed via a static function call.\bs
 \\

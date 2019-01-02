@@ -7,13 +7,14 @@
 \title{APSC 310 Work Term Technical Report}
 
 % Flags
-\newif\iftwocolumns\twocolumnsfalse
+\newif\iftwocolumns\twocolumnstrue
+% \newif\iftwocolumns\twocolumnsfalse
 
 % Figure sizing
 \iftwocolumns
-\newcommand{\fullwidth}{0.475\textwidth}
+\newcommand{\fullwidth}{0.49\textwidth}
 \else
-\newcommand{\fullwidth}{0.95\textwidth}
+\newcommand{\fullwidth}{0.99\textwidth}
 \fi
 
 % Document
@@ -53,6 +54,9 @@
 % [STRUCTURAL]
 \clearpage
 \import{pages/}{structural.tex}
+
+\clearpage
+
 
 % [ARCHITECTURAL]
 % \import{pages/}{architectural.tex}

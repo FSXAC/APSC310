@@ -124,7 +124,70 @@ Sample code for an exmaple of how the decorator pattern is used in a generic UI 
 TODO: Facade is a single class that represents an entire system which provides better separation and abstraction. Improves code maintainability and decouples critical parts of a system from external interactions
 
 \subsection{Flyweight}
-TODO: Flyweight are used to share expensive objects more efficiently. 
+Flyweight is a structural design pattern that optimizes computation efficiency by making clients use shared resources that are computationally expensive.\bs
+\\
+Consider when we want to load a website and the web page we are loading into may contain multiple references of an image. (i.e. the website logo, or an advertisement). Usually, these images are external references to another URL, so it takes time to access that URL and retrieve the image, making it relatively timely expensive. Therefore, it is undesirable to fetch the image one hundred times if the webpage displays the same image one hundred times. It would be reasonable to cache the first instance, then reuse the resource for all subsequent referenes.\bs
+\\
+We also want to have some unique information about each instance. In the website example, even though all one hundred images are identical (the data they shared are considered \textit{intrinsic}), they have to have some unique (\textit{extrinsic}) information about them, such as position on the page, size, etc.\bs
+\\
+The flyweight states that we separate the intrinsic and extrinsic part of a particular class. The intrinsic data is used for comparison and cached. To check if a particular instance of a class with same intrinsic data exists, a hashing algorithm may be utilized. \footnote{A hashing algorihtm takes an object and outputs a unique number; this process is fast and cannot be reversed.}\bs
+\\
+Lastly, a factory \ref{section:factories} is used to create new instances to provide an extra process for instance creation.\bs
+\\
+In video games, the flyweight design patterns are used to cut down spacial resources. In most cases, these resources are data and assets that uses relatively high memory, such as high-definition textures, sound, or other forms of data such as timeline, animation keyframes, and motion tracking.\bs
+\\
+I setup a small example in figure \ref{fig:flyweight} on how flyweight could apply to textures. In my setup, I display 16 textures located at different (x, y) coordinates. In the former example (figure \ref{fig:no-flyweight}), the image is loaded total of 16 times. In the second example in figure \ref{fig:with-flyweight}, the image is only loaded once upon the initial draw request, but all subsequent calls simply refers to the image cached from the first time.
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+        \includegraphics[width=\textwidth]{assets/noflyweight}
+        \caption{Without using flyweight}
+        \label{fig:no-flyweight}
+	\end{subfigure}
+	~
+	\begin{subfigure}[b]{0.49\textwidth}
+		\centering
+        \includegraphics[width=\textwidth]{assets/flyweight}
+        \caption{Using flyweight}
+        \label{fig:with-flyweight}
+	\end{subfigure}
+
+	\caption{Visual comparison of not using and using the flyweight design pattern}
+	\label{fig:flyweight}
+\end{figure}
+
+Assuming the following data sizes in table \ref{table:flyweight-datasize}, the reduction in spacial resources are significant (see table \ref{table:flyweight-optimization}). In our experimental setup, the memory used is up to 95\% less due to elimination of repeated resources. With less memory resource to process, the pattern naturally also reduces computation resources leading to faster performances.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ll}
+    Data type & Size (B) \\ \hline
+    Image     & 1840     \\
+    int       & 2       
+    \end{tabular}
+    \caption{Assumed data type sizes in the flyweight experiment}
+    \label{table:flyweight-datasize}
+\end{table}
+
+\iftwocolumns
+\end{multicols}
+\fi
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lllll}
+    & \# Images & Image memory (kB) & \texttt{int} memory (B) & Total memory allocated (kB)\\ \hline
+    No flyweight & 16 & 29.44 & 64 & 29.504 \\
+    With flyweight & 1 & 1.84 & 64 & 1.904 \\ \hline
+    & & & \textbf{\% Reduction} & -93.5\% \\
+    \end{tabular}
+    \caption{Performance differences of not using vs. using flyweight}
+    \label{table:flyweight-optimization}
+\end{table}
+\iftwocolumns
+\begin{multicols}{2}
+\fi
 
 \subsection{Proxy}
 TODO: Placeholder class to another class to control access to it. It provides an additional in-between level to support more controlled access. The proxy wraps the object and add delegation that matches the original class interface exactly (which is different from adapter, as adapter changes the interface). Examples include smart pointers, etc. (insert 4 common uses).
