@@ -9,6 +9,13 @@
 % Flags
 \newif\iftwocolumns\twocolumnsfalse
 
+% Figure sizing
+\iftwocolumns
+\newcommand{\fullwidth}{0.475\textwidth}
+\else
+\newcommand{\fullwidth}{0.95\textwidth}
+\fi
+
 % Document
 \begin{document}
 
@@ -36,18 +43,22 @@
 \import{pages/}{intro.tex}
 
 % [CREATIONAL]
+\clearpage
 \import{pages/}{creational.tex}
 
 % [BEHAVIOR]
+\clearpage
 \import{pages/}{behavioral.tex}
 
 % [STRUCTURAL]
+\clearpage
 \import{pages/}{structural.tex}
 
 % [ARCHITECTURAL]
 % \import{pages/}{architectural.tex}
 
 % [CONCLUSION]
+\clearpage
 \import{pages/}{conclusion.tex}
 
 % [BIBLIOGRAPHY]
