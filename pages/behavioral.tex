@@ -26,13 +26,29 @@ Another chain of command pattern observed in the Forstbite engine editor, is han
 
 \subsection{Command}
 
-Decouples action request and action handlers. The callee who makes the request makes no assumptions about the class the receives the command. Effectively decoupling them.
-\bs
-This opens up more flexibility in mapping a requests to a handler. An example is re-mappable input handling. Instead of listening for a key press, then calling a specific function that the key press corresponds to. It invokes a command object that holds a reference to the \textit{real object} so that the handler can be called.
-\bs
-In between we could do more things. For instance, keep track of how many times the action has requested.
-\bs
-Command pattern also opens up for redo/undo operations.
+The command design pattern decouples action request and action handlers. The callee who makes the request makes no assumptions about the class the receives the command. The decoupling between the two classes means that the client does not know anything about the handler. Likewise, the handler does not know anything about the callee of the command.\bs
+\\
+A loosely related real life analogy would be managers and programmers. Suppose programmer are specialized and can code a specific kind of software, and the managers tell programmers what to make. In a tightly coupled, without utilizing the command pattern, the manager is specialized too. Different programmer would need a different manager and the specific ``manager-to-programmer'' mapping cannot get broken (i.e. it does not make sense to have a manager responsible for online-services to give tasks to a graphics programmer).\bs
+\\
+Using the command pattern, the manager makes no assumption about who will be assigned the task/command they request. The manager simply broadcasts its requests out and moves on. Similarly, the programmer (handler) makes no assumption on who issued the task/command. But if the programmer is responsible for that type of task/command, they will perform the corresponding action.\bs
+\\
+In video games, the command pattern is most applicable in input mapping. An input is any input player gives to the game, such as controller axis and buttons, mouse presses, mouse move, and keyboard key pressed. In a tightly coupled scenario, the video game features a single control scheme and the player cannot customize it. Many older video games such as Tetris\cite{nes-tetris} and Super Mario Bros \cite{nes-mario} feature relatively simple controls. In addition to the limitation of the hardware which hinders the flexibility of the software, there is no customizable input mapping.\bs
+\\
+In nearly all of the newer game titles, regardless of they are from AAA production or independent developers, remappable inputs are almost an industry standard. Quality assurance (QA) of game studios rigorously perform compliance testing to ensure that remappable inputs function for customization as well as accessbility to increase player satisfaction.\bs
+\\
+In the example shown in figure \ref{fig:csgo-input}\cite{csgo-input}, the game Counter-Strike: Global Offensive (CSGO) by Valve demonstrates remappable inputs which is a convention adopted by the video game industry.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\fullwidth]{assets/csgo-inputs}
+	\caption{Option menus for optional input remapping in the CSGO}
+	\label{fig:csgo-input}
+\end{figure}
+
+On the left side, we have the description of what handler a particular input would be attached to (i.e. ``Fire'' action is bounded to the controller's \textit{right trigger} button). By selecting this menu item and apply a new input, we could remap the action \textit{fire} to something else. This is extremely useful if the player does not own a controller, has disabilities that prevent them from reaching certain inputs, or just prefers their own input scheme. Note that CSGO is not special and is presented for the sake of the example. Modern games (especially ones that shipped to PC) will most certainly feature remappable inputs.\bs
+\\
+The command design pattern opens up more flexibility in mapping a requests to a handler. The software programming as well as game design is opened to be flexible. The callee invokes a command object that holds a reference to the \textit{real object} so that the handler can be called. Note that the command object is a \textit{mediator} between the callee and the handler (see section \ref{ssection:mediator}). Thus, we are not limited to simply remapping inputs, other logic could be implemented in the layer between the callee and the handler. One instance is to also incorporate \textit{memento} design pattern and implement a simple undo/redo system.\bs
+\\
 
 \subsection{Mediator}\label{ssection:mediator}
 
@@ -117,7 +133,7 @@ In observer pattern, the object sending the events is the \textit{subject}, and 
 
 Without using any mediators, the subject is \textit{loosely coupled}\footnote{Loose coupling means dependency to another object via interface or abstract class. Whereas tight coupling means dependency to the concrete class directly.} to the observer types. The subject holds a collection or list of registered observers, such that when an event should be fired, the subject iterates through all the observers and deliver the event.\bs
 \\
-The client is responsible for managing the observers' lifetime. The client or observers are responsible for when to register or unregister to a subject. In essence, the subject makes no assumption about its observers. (Similar to the relationship in model-view-controller where the controller act as observer to the view to enable user interaction - see section \ref{ssection:ecs}).\bs
+% The client is responsible for managing the observers' lifetime. The client or observers are responsible for when to register or unregister to a subject. In essence, the subject makes no assumption about its observers. (Similar to the relationship in model-view-controller where the controller act as observer to the view to enable user interaction - see section \ref{ssection:ecs}).\bs
 \\
 In Frostbite (and extends to many game engines and software), many OOP and inter-class relationship relies on events. A player's interaction with the controller, keyboard, or mouse triggers input events to be handled by the Input Handler. For example shown in figure \ref{fig:unreal-input}, the subject are objects that outputs an event whenever certain key is pressed (red blocks). The output event \textit{Released} is hooked up to some observer. The corresponding observers are the \textit{Move Updated Component} handlers that carries out specific tasks whenever it receives the event/signal.
 
