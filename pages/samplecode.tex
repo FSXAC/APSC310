@@ -28,6 +28,24 @@ The decorator classes holds a member with a type of widget interface such that i
 \subsubsection{Usage}
 \lstinputlisting[language=C++, firstline=67, lastline=82]{code/Decorator.hpp}
 
+\subsection{Flyweight}\label{code:flyweight}
+This section of sample code demonstrates how a flyweight design pattern may be applicable in a simple texture resources management scenario, where memory allocation is important.
+\subsubsection{Core Class (Intrinsic)}
+The intrinsic data, or core class contains the \textit{shared} information.
+\lstinputlisting[language=C++, firstline=14, lastline=20]{code/Flyweight.hpp}
+\subsubsection{Wrapper Class (Extrinsic)}
+Extrinsic data in wrapper classes contain information that is unique to that particular instance. In this case, position in \texttt{(x, y)}.
+\lstinputlisting[language=C++, firstline=23, lastline=36]{code/Flyweight.hpp}
+\subsubsection{Flyweight Creation and Logic}
+The flyweights creation are managed by a simple factory.
+\lstinputlisting[language=C++, firstline=38, lastline=66]{code/Flyweight.hpp}
+To make comparison of the requested instance versus the list of cached instances, we compare their hash value. Therefore a simple hashing algorithm can be used:
+\lstinputlisting[language=C++, firstline=3, lastline=11]{code/Flyweight.hpp}
+\subsubsection{Usage}
+Example of how to use the design pattern.
+\lstinputlisting[language=C++, firstline=69, lastline=88]{code/Flyweight.hpp}
+
+
 \subsection{Observer}\label{code:observer}
 \subsubsection{Subject Abstract Observer Class}
 The simple implementation of a observer pattern is as follows. Notice that the subject is loosely coupled to the observer. But the observer is tightly coupled to the subject.
