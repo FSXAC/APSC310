@@ -2,7 +2,19 @@
 
 The classic software development design pattern as described by the \textit{Gang of Four}\cite{gof} is undoubtly essential in even modern software development. In video game technology and design, the need is amplified. The need to desgin pattern is important as video games are computationally demanding, both in terms of process as well as memory. As consumers (players) push for more realistic and immersive experience, the technology becomes more complex. So it is also important to use these ``basis'' solutions to simply more complex solutions.\bs
 \\
-As stated many times throughout the report, the benefits of the design patterns vary 
+The most common, and perhaps important, benefit of certain design patterns is that they decouple code. Making otherwise \textit{spaghetti code} or codebase filled with tech-debt usable in modern applications. Creation design patterns helps manage the creation and lifetime of objects. Behavior design patterns 
 
 \subsection{Recommendations}
-TODO:
+
+Creational design patterns should be mostly applied only where there are many variation of a particular class. These classes often have the property of holding some generic logic and IO, such as a button, but have different implemenation or extra bahavior or data.
+
+Creational design patterns should not be used if not needed as it might create unncessary levels of abstraction such as abstract factories from section \ref{section:factories}, or breakage of abstraction such as a singleton from section \ref{ssection:singleton}.
+
+Behavioral design patterns assist in managing communication and interaction between classes or objects. These communication 
+
+Behavior design patterns provides bettered managed communication or interaction between classes and emphasizes on decoupling.
+
+Structural patterns improves performance and maintainability of the software while keeping the code clean and organized. Structural design patterns should be applied when the software is large and difficult to debug. Structural patterns should also be used to conserve resources. Structural patterns should not be used to resolve poor design as they are not solutions to design problems but rather problems due to limitation of the programming language (the technology).
+\bs
+\\
+All design patterns investigated here have some pre-requisit, meaning that each are meant to solve one type of problem and one type of problem only. Combinations of patterns can be used to build clean code, however one should never try to \textit{start} a code base with design patterns. Design patterns are meant to optimize and polish existing code and solve problems that are often only related to memeory, computation overhead reduction and organization. Design patterns should never be applied on non-issue or problems that do not yet exist.
