@@ -5,26 +5,9 @@
 \begin{multicols}{2}
 \fi
 
-TODO:
+The behavior design patterns recognizes the problem in common software developments and provided more flexible communication between classes and class hiearchies. The overall benefits are more robust and flexible software.
 
-\subsection{Chain of Responsibility}
-
-(InputHandlers and InputDispatchers) in Frostbite engine. A series of input handlers are chained together. Each input handler may hold reference to other input handlers.
-\bs
-When an input, such as mouse, keyboard, or controller action occurs. The calls traverses down the chain of input handlers until one of the input handler entities "consumes" it, which ends the chain.
-\bs
-
-Another chain of command pattern observed in the Forstbite engine editor, is handling mouse press when there are multiple \textit{hitzones}\footnote{Hitzones are interactive areas for mouse that reports data and events such as mouse position, if mouse is hover, mouse button presses and releases} overlapped (figure \ref{fig:chainofcommand-mousezones}). Any press or hovering event will be handled by the top-most hitzone entity first. If the handler does not consume the input event, the event will naturally "flow" down to the next level.
-\bs
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.3\textwidth]{assets/chainofcommand_mousezones}
-	\caption{Mouse interacting with overlapping mouse hitzones}
-	\label{fig:chainofcommand-mousezones}
-\end{figure}
-
-\subsection{Command}
+\subsection{Command}\label{ssection:command}
 
 The command design pattern decouples action request and action handlers. The callee who makes the request makes no assumptions about the class the receives the command. The decoupling between the two classes means that the client does not know anything about the handler. Likewise, the handler does not know anything about the callee of the command.\bs
 \\
@@ -50,9 +33,76 @@ On the left side, we have the description of what handler a particular input wou
 The command design pattern opens up more flexibility in mapping a requests to a handler. The software programming as well as game design is opened to be flexible. The callee invokes a command object that holds a reference to the \textit{real object} so that the handler can be called. Note that the command object is a \textit{mediator} between the callee and the handler (see section \ref{ssection:mediator}). Thus, we are not limited to simply remapping inputs, other logic could be implemented in the layer between the callee and the handler. One instance is to also incorporate \textit{memento} design pattern and implement a simple undo/redo system.\bs
 \\
 
+\subsection{Chain of Responsibility}
+
+In extension to \textit{commands} pattern, chain of responsiblity essentially maps a single command to multiple handlers in a chain. When a request is raised, the first handler in the chain will receive and the logic in the first handler can decide if it wants to ``lower'' or ``resolve'' the request. If resolves, the request will not be passed down the chain. Otherwise, the next handler will be called and the same request is passed.\bs
+\\
+A common real life example is the algorithm of giving someone money in exact amount, in cash. Because cash have some specific denominations, we build this chain of command where we first use the largest denomination and then move down the denominations. For example, if I need to pay \$255.60, the logic would look like this in figure \ref{fig:chain-pay}:
+
+\begin{figure}[H]
+	\centering
+
+	\scalebox{0.75}{
+		\begin{tikzpicture}
+			\node (start)[startstop]{Start};
+			\node (pay1)[process, below of=start]{Pay the difference in \$100};
+			\node (calc1)[process, right of=pay1, xshift=4cm]{Recalculate difference};
+			\node (pay2)[process, below of=pay1]{Pay the difference in \$50};
+			\node (calc2)[process, right of=pay2, xshift=4cm]{Recalculate difference};
+			\node (pay3)[process, below of=pay2]{Pay the difference in \$5};
+			\node (calc3)[process, right of=pay3, xshift=4cm]{Recalculate difference};
+			\node (pay4)[process, below of=pay3]{Pay the difference in \$0.25};
+			\node (calc4)[process, right of=pay4, xshift=4cm]{Recalculate difference};
+			\node (pay5)[process, below of=pay4]{Pay the difference in \$0.10};
+			\node (end)[startstop, below of=pay5]{End};
+
+			\draw [arrow](start)--(pay1);
+
+			\draw [arrow](pay1)--(calc1);
+			\draw [arrow](pay2)--(calc2);
+			\draw [arrow](pay3)--(calc3);
+			\draw [arrow](pay4)--(calc4);
+
+			\draw [arrow](calc1)--(pay2);
+			\draw [arrow](calc2)--(pay3);
+			\draw [arrow](calc3)--(pay4);
+			\draw [arrow](calc4)--(pay5);
+
+			\draw [arrow](pay5)--(end);
+		\end{tikzpicture}
+	}
+
+	\caption{Chain of Responsibility design pattern demonstrated in process of an real life scenario.}
+	\label{fig:chain-pay}
+\end{figure}
+
+In video games, chain of responsiblity, in combination of the \textit{command} design pattern (section \ref{ssection:command}) are often used handle large scale UI. I will use the term \textbf{chain of commands} for the combined use of the two patterns.\bs
+\\
+In the Frostbite engine (and other game engines) there exists elements \textit{InputHandler} and \textit{InputDispatcher}. The input handler elemet utilizes the command pattern and on a high level, listens to a particular user input (mouse, keyboard, or controller) and outputs an event when the input is active. The input dispatcher element may hold references to other input handlers via links. This creates a chain of command as when an input is fired, the event travels up the chain of input handlers. Each input handler has some logic and could be customized to ``consume'' the input. Only the input handler that ``consumes'' the input will carry out the logic, and other input handlers down the chain will not receive the command.\bs
+\\
+The input dispatchers enable/disable input handlers on the chain. This is useful for when we only need certain inputs at certain time. For example, when in game, the mouse cursor is disabled as the player is using the mouse to control the camera, and the input for mouse buttons should correspond to aim and fire of the gun. However, when we activate menus, we show the cursor and disable the input to areas we just discussed. Instead turning on other UI related input handling such as mouse hover etc.\bs
+\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\fullwidth]{assets/inputdispatch}
+	\caption{General model of input tree with input handlers and input dispatchers}
+	\label{fig:inputdispatch}
+\end{figure}
+
+During handling of mouse press when there are multiple \textit{hitzones}\footnote{Hitzones are interactive areas for mouse that reports data and events such as mouse position, if mouse is hover, mouse button presses and releases} overlapped (figure \ref{fig:chainofcommand-mousezones}). Any press or hovering event will be handled by the top-most hitzone entity first. If the handler does not consume the input event, the event will naturally "flow" down to the next level.
+\bs
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{assets/mousehover}
+	\caption{Mouse interacting with overlapping mouse hitzones}
+	\label{fig:chainofcommand-mousezones}
+\end{figure}
+
 \subsection{Mediator}\label{ssection:mediator}
 
-TODO:
+% TODO:
 
 Mediator acts as a middle-man between communicating objects and decouples them\cite{sm-mediator}.
 
@@ -150,8 +200,8 @@ There are several approach to the implementation. Mainly, the subject could push
 \\
 A sample code of an observer pattern example is in section \ref{code:observer}. In this example, we created a simple system to broadcast world events to a multiplayer game.
 
-\subsection{Visitor}
-TODO:
+% \subsection{Visitor}
+% TODO:
 
 
 % Two columns end

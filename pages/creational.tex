@@ -178,16 +178,19 @@ The object pool better organizes object life time of the objects in the pool. Th
 % TODO:
 % An example of the object pool design pattern would be (StateStream from simulation threads to rendering threads).
 
-(Objective markers that need to be displayed on the screen: they are persistent in the world, but not all of them needs to be displayed all the time. Only the ones inside players' camera frustum are rendered. But that does not mean we should destroy other markers as it would be more expensive to create them again, and could cause performance issues if the player looks around too fast (spinning). So we return the instance of the marker when they're no longer being rendered to the object pool. They will be accessible and can be rendered again when players' camera puts these markers into view.)
+The object pool are applied universally in game engines to relieve required memory resources as they are important in larger games to manage tens of thousands of objects. In Anthem as seen in figure \ref{fig:anthem-hud-markers}, the object pool can be used on the on-screen markers (on the top of the image). These heads-up-display (HUD) markers shows the player where they need to go, or where other players are. These markers are persistent in the 3D world but not all of them needs to be displayed at all times. It would be a waste of resources to draw the markers even if they can not be seen. 
+Only the ones inside players' camera frustum are rendered. But that does not mean we should destroy other markers as it would be more expensive to create them again, and could cause performance issues if the player looks around too fast (spinning). 
+So we return the instance of the marker when they're no longer being rendered to the object pool. They will be accessible and can be rendered again when players' camera puts these markers into view.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\fullwidth]{assets/anthem-markers}
+	\includegraphics[width=\fullwidth]{assets/anthem-markers2}
 	\caption{HUD UI markers from Anthem E3 Gameplay Demo\cite{anthem-e3}}
 	\label{fig:anthem-hud-markers}
 \end{figure}
 
-One possible extended (more general) example(?) is culling\footnote{culling is hiding objects from rendering to improve performance} objects from rendering. Obviously since the player cannot see them when it's outside the view of the screen, we do not want to render them (shading, particles, textures) in order to improve performance. But re-creating the instances of world objects when player puts them into view again could be expensive, and cause stutter and lag when player looks around too fast. An object pool is applicable such that the objects that need to be rendered could be checked out, and returned when they no longer need to be rendered. See figure \ref{fig:culling} as an example for it used in Horizon Zero Dawn\cite{hzd}.\bs
+One possible general use case is manage objects' lifetime based on culling\footnote{culling is hiding objects from rendering to improve performance} objects from rendering. Obviously since the player cannot see them when it's outside the view of the screen, we do not want to render them (shading, particles, textures) in order to improve performance. But re-creating the instances of world objects when player puts them into view again could be expensive, and cause stutter and lag when player looks around too fast. An object pool is applicable such that the objects that need to be rendered could be checked out, and returned when they no longer need to be rendered. See figure \ref{fig:culling} as an example for it used in Horizon Zero Dawn\cite{hzd}.\bs
 \\
 
 \iftwocolumns
