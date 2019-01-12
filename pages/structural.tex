@@ -114,8 +114,30 @@ Note that both \textit{core} and \textit{decorator} classes extends the interfac
 \\
 Lastly, the client is responsible for managing the creation of the decorators as well as the composition of the decorator classes added to the core classes.\bs
 \\
-In games, such pattern is applicable in game assets that have the ability to be modified. To name a few, these game objects could be potion effects to playable or non-playable characters (NPCs) (figure \ref{fig:minecraft-potion-effect}), modifications to vehicles (figure \ref{fig:bf4-vehicle-mods}), or enchantment on tools or weapons (figure \ref{fig:minecraft-enchantments}).\bs
-\\
+In games, such pattern is applicable in game assets that have the ability to be modified. To name a few, these game objects could be potion effects to playable or non-playable characters (NPCs) (figure \ref{fig:minecraft-potion-effect})\cite{minecraft-potion}, modifications to vehicles (figure \ref{fig:bf4-vehicle-mods})\cite{bf4-vehicle-mod}, or enchantment on tools or weapons (figure \ref{fig:minecraft-enchantments})\cite{minecraft-enchant}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\fullwidth]{assets/minecraft-potion}
+	\caption{Potion effects on the player in the game Minecraft}
+	\label{fig:minecraft-potion-effect}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\fullwidth]{assets/bf4-vehicle-mod}
+	\caption{Vehicle customization in Battlefield 4}
+	\label{fig:bf4-vehicle-mods}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\fullwidth]{assets/minecraft-enchant}
+	\caption{Enchantment that modifies tool or weapon behaviors in Minecraft}
+	\label{fig:minecraft-enchantments}
+\end{figure}
+
+
 The decorator is a structural design pattern to enhance the flexibility of OOP software by allowing extra behaviors to be attached to the core class during run-time. The decoupling of core class functionalities from the potential (but optional) decorator functionalities reduces the tedious need of programming every permutation of core and decorator classes. Thus, the codebase is more maintainable as well. The decorator design pattern shows no change in performance.\bs
 \\
 Sample code for an exmaple of how the decorator pattern is used in a generic UI scenario is available in section \ref{code:decorator}.
